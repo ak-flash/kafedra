@@ -1,0 +1,201 @@
+.unreset {
+    a {
+        @apply text-primary-700 underline;
+    }
+
+    p {
+        @apply my-4;
+    }
+
+    figure {
+        @apply bg-white;
+    }
+
+    .image img {
+        @apply mx-auto;
+    }
+
+    .image-style-side img {
+        @apply float-right;
+    }
+
+    blockquote {
+        @apply border-l-4 border-gray-300 pl-4 italic;
+    }
+
+    hr {
+        @apply border;
+    }
+
+    h1 {
+        @apply text-xl font-bold my-2;
+    }
+
+    h2 {
+        @apply text-2xl font-bold my-3;
+    }
+
+    h3 {
+        @apply text-lg font-bold my-4;
+    }
+
+    h4 {
+        @apply text-base font-bold my-5;
+    }
+
+    h5 {
+        @apply text-sm font-bold my-6;
+    }
+
+    h6 {
+        @apply text-xs font-bold my-10;
+    }
+
+    article,
+    aside,
+    nav,
+    section {
+        h1 {
+            @apply text-2xl font-bold my-3;
+        }
+
+        article,
+        aside,
+        nav,
+        section {
+            h1 {
+                @apply text-lg font-bold my-4;
+            }
+
+            article,
+            aside,
+            nav,
+            section {
+                h1 {
+                    @apply text-base font-bold my-5;
+                }
+
+                article,
+                aside,
+                nav,
+                section {
+                    h1 {
+                        @apply text-sm font-bold my-6;
+                    }
+
+                    article,
+                    aside,
+                    nav,
+                    section {
+                        h1 {
+                            @apply text-xs font-bold my-10;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    ul,
+    menu {
+        // should be my-4 for proper reset, but thats ugly af
+        @apply list-disc my-1 pl-10 text-gray-600;
+    }
+
+    ol {
+        @apply list-decimal my-4 pl-10;
+    }
+
+    ul,
+    ol {
+        ul {
+            list-style-type: circle;
+        }
+
+        ul,
+        ol {
+            ul {
+                list-style-type: square;
+            }
+        }
+    }
+
+    dd {
+        @apply pl-10;
+    }
+
+    dl {
+        @apply my-4;
+    }
+
+    ul,
+    ol,
+    menu,
+    dl {
+        ul,
+        ol,
+        menu,
+        dl {
+            margin: 0;
+        }
+    }
+
+    legend {
+        @apply py-0 px-1;
+    }
+
+    fieldset {
+        @apply my-0 mx-1 pt-0 px-1 pb-2;
+    }
+
+    b,
+    strong {
+        font-weight: bold;
+        @apply text-gray-200;
+    }
+
+    pre {
+        @apply p-2 px-4 rounded-md bg-gray-600 text-white;
+    }
+
+    .bordered tr td {
+        @apply border border-gray-400;
+    }
+
+    td {
+        @apply p-2;
+    }
+
+    .text-huge {
+        @apply text-3xl;
+    }
+
+    .text-big {
+        @apply text-xl;
+    }
+
+    .text-small {
+        @apply text-sm;
+    }
+
+    .text-tiny {
+        @apply text-xs;
+    }
+
+    .button {
+        @apply px-2 py-1 border-transparent font-medium rounded text-white bg-indigo-800;
+
+        &:hover {
+            @apply bg-indigo-600;
+        }
+
+        &:focus {
+            @apply outline-none border-indigo-500;
+        }
+
+        &:active {
+            @apply bg-indigo-700;
+        }
+    }
+}
