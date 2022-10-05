@@ -1,0 +1,44 @@
+import:
+  - recipe/laravel.php
+  - contrib/npm.php
+
+config:
+  application: 'kafedra'
+  repository: 'git@github.com:ak-flash/kafedra.git'
+  base_deploy_path: '/www/wwwroot'
+  php_fpm_version: '8.1'
+
+hosts:
+  prod:
+    hostname: 'kafedra.ak-vps.ml'
+    deploy_path: '{{base_deploy_path}}/kafedra.ak-vps.ml'
+    remote_user: ubuntu
+    use_relative_symlink: false
+    ssh_multiplexing: false
+    git_tty: false
+    UserKnownHostsFile: '/dev/null'
+    StrictHostKeyChecking: no
+
+tasks:
+  deploy:
+    - deploy:prepare
+    - deploy:vendors
+    - artisan:cache:clear
+    - artisan:storage:link
+    - artisan:view:cache
+    - artisan:config:cache
+    - artisan:migrate
+    - npm:install
+    - npm:run:build
+    - deploy:publish
+    - php-fpm:reload
+    - artisan:queue:restart
+  npm:run:build:
+    - run: "cd {{release_path}} && npm run build"
+  nginx:restart:
+    - run: "sudo service nginx restart"
+  php-fpm:reload:
+    - run: "sudo service php-fpm-81 restart"
+
+after:
+  deploy:failed: deploy:unlock
