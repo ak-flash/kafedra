@@ -9,5 +9,5 @@ class CreateDiscipline extends CreateRecord
 {
     protected static string $resource = DisciplineResource::class;
 
-
+    protected static ?string $title = 'Создать дисциплину';
 }

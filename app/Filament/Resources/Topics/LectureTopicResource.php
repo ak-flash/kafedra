@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Topics;
 
 use App\Filament\Resources\Topics\LectureTopicResource\Pages;
 use App\Filament\Resources\Topics\LectureTopicResource\RelationManagers;
+use App\Models\MCQ\Question;
 use App\Models\Topics\LectureTopic;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -17,7 +18,7 @@ class LectureTopicResource extends Resource
 {
     protected static ?string $model = LectureTopic::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-bar';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -37,7 +38,16 @@ class LectureTopicResource extends Resource
     {
         return $table
             ->columns([
-                //
+
+                Tables\Columns\TextColumn::make('id')->label('Id')->toggleable()->sortable()->searchable(),
+
+                Tables\Columns\TextColumn::make('title')->label('Тема лекции')->sortable()->searchable(),
+
+                Tables\Columns\TextColumn::make('created_at')->label('Создано')->dateTime()->toggleable()
+                    ->description(fn (Question $record): string => $record->author->name),
+
+                Tables\Columns\TextColumn::make('updated_at')->label('Обновлено')->dateTime()->toggleable()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -73,6 +83,7 @@ class LectureTopicResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])
+            ->whereIn('discipline_id', auth()->user()->disciplines_cache->pluck('id'));
     }
 }

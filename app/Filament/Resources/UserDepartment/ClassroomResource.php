@@ -13,7 +13,7 @@ class ClassroomResource extends Resource
 {
     protected static ?string $model = Classroom::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     protected static ?string $navigationLabel = 'Учебные комнаты';
 
@@ -71,4 +71,6 @@ class ClassroomResource extends Resource
         return parent::getEloquentQuery()
             ->whereIn('department_id', auth()->user()->departments()->pluck('departments.id'));
     }
+
+
 }

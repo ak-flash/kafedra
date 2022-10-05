@@ -11,8 +11,4 @@ class CreateSection extends CreateRecord
 
     protected static ?string $title = 'Создать раздел';
 
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
-    }
 }

@@ -13,6 +13,7 @@ class EditPosition extends EditRecord
     protected function getActions(): array
     {
         return [
+            Actions\ForceDeleteAction::make(),
             Actions\DeleteAction::make(),
         ];
     }

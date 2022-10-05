@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->enum('difficulty', ['3', '4', '5']);
+            $table->tinyInteger('difficulty')->default(3)->after('type_id');
         });
     }
 

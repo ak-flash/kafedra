@@ -5,7 +5,10 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
+        "archtechx/enums": "^0.3.1",
+        "awcodes/filament-quick-create": "^1.0",
+        "barryvdh/laravel-dompdf": "^2.0",
         "bezhansalleh/filament-shield": "^2.1",
         "doctrine/dbal": "^3.4",
         "filament/filament": "^2.0",
@@ -21,9 +24,13 @@
         "livewire/livewire": "^2.10",
         "owen-it/laravel-auditing": "^13.0",
         "predis/predis": "^2.0",
-        "spatie/laravel-permission": "^5.5"
+        "saadj55/filament-copyable": "dev-master",
+        "spatie/laravel-permission": "^5.5",
+        "staudenmeir/eloquent-has-many-deep": "^1.7",
+        "wireui/wireui": "^1.14"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
@@ -37,7 +44,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

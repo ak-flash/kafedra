@@ -1,0 +1,16 @@
+{
+    "arial": {
+        "normal": "arial_normal_2c7256e589869ce0b9eadcbebf721322",
+        "bold": "C:\\laragon\\www\\kafedra\\storage\\fonts\/arial_bold_2c7256e589869ce0b9eadcbebf721322"
+    },
+    "verdana": {
+        "normal": "verdana_normal_33042181e942baef05dfd843bb44cbda"
+    },
+    "arialbi": {
+        "normal": "C:\\laragon\\www\\kafedra\\storage\\fonts\/arialbi_normal_840ef6ff041ce673c49dfbcc994c5e22",
+        "bold": "arialbi_bold_840ef6ff041ce673c49dfbcc994c5e22"
+    },
+    "arialbold": {
+        "bold": "arialbold_bold_2cab00297778bb15fa1d85886121414b"
+    }
+}

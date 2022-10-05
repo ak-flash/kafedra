@@ -2,18 +2,24 @@
 
 namespace App\Models\MCQ;
 
+use App\Models\Topics\ClassTopic;
 use App\Models\User;
 use App\Models\UserDepartment\Section;
+use App\Traits\AuthorEditorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Tags\HasTags;
 
-class Question extends Model
+class Question extends Model implements Auditable
 {
     use HasFactory;
     use HasTags;
     use SoftDeletes;
+
+    use \OwenIt\Auditing\Auditable;
+    use AuthorEditorTrait;
 
     protected $fillable = [
         'question', 'section_id', 'type_id', 'user_id',
@@ -24,28 +30,23 @@ class Question extends Model
         'answers' => 'array',
     ];
 
+    protected $with = [
+        'author', 'editor'
+    ];
+
     public const TYPES = [
         1 => 'С одним правильным ответом',
     ];
 
-
-    /*public function answers(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Answer::class);
-    }*/
 
     public function section(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Section::class);
     }
 
-    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function class_topics()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsToMany(ClassTopic::class)->withTimestamps();
     }
 
-    public function editor(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class, 'last_edited_by_id');
-    }
 }

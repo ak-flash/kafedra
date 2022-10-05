@@ -17,10 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin/no-department', function () {
+    return view('errors.no-department');
+})
+    ->middleware(['auth:web'])
+    ->name('no-department');
 
-Route::prefix('/admin/mcq/')
+Route::prefix('/admin/')
     ->middleware(['auth:web','verified'])
     ->group(function () {
-        Route::get('variants', \App\Filament\Pages\MCQ\Variants::class)->name('filament.pages.variants');
+
+        Route::get('/variant/{variant}/print/{fontSize}', [\App\Http\Controllers\GetVariantPdf::class, 'generate'])
+            ->name('print.variant');
+
     });
 

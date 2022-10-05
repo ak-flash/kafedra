@@ -30,13 +30,14 @@ class SectionResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('department_id')
                             ->label('Кафедра')
-                            ->options(auth()->user()->departments()->pluck('name', 'departments.id'))
+                            ->options(auth()->user()->departments_cache->pluck('name', 'id'))
                             ->required(),
 
                         Forms\Components\TextInput::make('name')
                             ->label('Название')
                             ->required()
                             ->maxLength(255),
+
 
                         Forms\Components\Textarea::make('description')
                             ->label('Короткое описание')
@@ -50,10 +51,13 @@ class SectionResource extends Resource
     {
         return $table
             ->columns([
+
+                Tables\Columns\TextColumn::make('name')->label('Название'),
+
                 Tables\Columns\TextColumn::make('department.name')
                     ->label('Кафедра'),
 
-                Tables\Columns\TextColumn::make('name')->label('Название'),
+
 
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()->label('Обновлено'),
@@ -93,6 +97,11 @@ class SectionResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ])
-            ->whereIn('department_id', auth()->user()->departments()->pluck('departments.id'));
+            ->whereIn('department_id', auth()->user()->departments_cache->pluck('id'));
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::whereIn('department_id', auth()->user()->departments_cache->pluck('id'))->count();
     }
 }

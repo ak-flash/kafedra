@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Common\DepartmentResource\RelationManagers;
 
+use App\Models\Common\Department;
 use App\Models\Common\Position;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -9,6 +10,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\AttachAction;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Role;
 
 class UsersRelationManager extends RelationManager
@@ -38,7 +41,8 @@ class UsersRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\AttachAction::make()
-                ->form(fn (AttachAction $action): array => [
+                    ->after(fn () => Cache::tags('departmentsUserList')->flush())
+                    ->form(fn (AttachAction $action): array => [
                     $action->getRecordSelect(),
 
                     Forms\Components\Card::make()
@@ -53,7 +57,7 @@ class UsersRelationManager extends RelationManager
 
                             Forms\Components\Select::make('volume')
                                 ->label('Ставка')
-                                ->options(['0,25', '0,5', '0,75', '1', '1,25', '1,25'])->required(),
+                                ->options(Position::POSITIONS_RATE)->required(),
                         ])->columns(2),
 
                     ]),

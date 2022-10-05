@@ -20,13 +20,14 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationLabel = 'Пользователи';
 
     protected static ?string $navigationGroup = 'Управление';
+
 
     public static function form(Form $form): Form
     {
@@ -86,12 +87,15 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')->label('Email')->sortable()->searchable()
                     ->extraAttributes(fn (User $record): array => ['class' => $record->email_verified_at ? 'text-success-500' : 'line-through text-danger-500']),
 
+                /*\Saadj55\FilamentCopyable\Tables\Columns\CopyableTextColumn::make('email')->label('Email')->sortable()->searchable()
+                    ->extraAttributes(fn (User $record): array => ['class' => $record->email_verified_at ? 'text-success-500' : 'line-through text-danger-500'])->icon('clipboard'),*/
+
                 Tables\Columns\TextColumn::make('phone')->label('Телефон'),
 
                 Tables\Columns\TextColumn::make('birth_date')
                     ->date()->label('Дата рождения')->sortable(),
 
-                Tables\Columns\TextColumn::make('updated_at')->label('Обновлено')->dateTime()->toggleable(),
+                Tables\Columns\TextColumn::make('updated_at')->label('Обновлено')->dateTime()->toggleable()->size('sm'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -124,15 +128,35 @@ class UserResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
+        $query = parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+
+        if(auth()->user()->is_admin)
+        {
+            return $query;
+        }
+
+        return $query->whereHas('departments', function (Builder $query) {
+                $query->whereIn('department_id', auth()->user()->departments_cache->pluck('id'));
+            });
+
     }
 
     protected static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        if(auth()->user()->hasRole('super_admin'))
+        {
+            return static::getModel()::count();
+        }
+
+        return static::getModel()::whereHas('departments', function (Builder $query) {
+            if(! auth()->user()->hasRole('super_admin'))
+            {
+                $query->whereIn('department_id', auth()->user()->departments_cache->pluck('id'));
+            }
+        })->count();
     }
 
 }

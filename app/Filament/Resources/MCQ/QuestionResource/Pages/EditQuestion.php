@@ -10,10 +10,14 @@ class EditQuestion extends EditRecord
 {
     protected static string $resource = QuestionResource::class;
 
+    public static ?string $title = 'Редактирование вопроса';
+
     protected function getActions(): array
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\ForceDeleteAction::make(),
+            Actions\RestoreAction::make(),
         ];
     }
 
