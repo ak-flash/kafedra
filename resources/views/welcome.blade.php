@@ -1,49 +1,22 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-app-layout>
 
-        <title>Кафедра</title>
+    <section class="py-24 flex items-center min-h-screen justify-center bg-white">
+        <div class="mx-auto max-w-[43rem]">
+            <div class="text-center">
+                <p class="text-lg font-medium leading-8 text-indigo-600/95">Управление кафедрой университета</p>
+                <h1 class="mt-3 text-[3.5rem] font-bold leading-[4rem] tracking-tight text-black">
+                    Кафедра CRM
+                </h1>
+                <p class="mt-3 text-lg leading-relaxed text-slate-400">
+                    Проверка и создание тестов, работа с документами, сотрудниками кафедры
+                </p>
+            </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+            <div class="mt-6 flex items-center justify-center gap-4">
+                <a href="/admin/" class="transform rounded-md bg-indigo-600/95 px-5 py-3 font-medium text-white transition-colors hover:bg-indigo-700">Войти</a>
 
-        <!-- Styles -->
-        <style>
-
-        </style>
-
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-
-
-                <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                </div>
-
+                <a href="#" class="transform rounded-md border border-slate-200 px-5 py-3 font-medium text-slate-900 transition-colors hover:bg-slate-50"> Отправить заявку на регистрацию</a>
             </div>
         </div>
-    </body>
-</html>
+    </section>
+</x-app-layout>
