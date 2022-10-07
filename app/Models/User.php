@@ -8,17 +8,20 @@ namespace App\Models;
  use App\Models\UserDepartment\Section;
  use App\Services\UserService;
  use Attribute;
+ use Filament\Models\Contracts\HasAvatar;
  use Illuminate\Contracts\Auth\MustVerifyEmail;
  use Illuminate\Database\Eloquent\Factories\HasFactory;
  use Illuminate\Database\Eloquent\SoftDeletes;
+ use Filament\Models\Contracts\FilamentUser;
  use Illuminate\Foundation\Auth\User as Authenticatable;
+
  use Illuminate\Notifications\Notifiable;
  use Laravel\Sanctum\HasApiTokens;
  use OwenIt\Auditing\Contracts\Auditable;
  use Spatie\Permission\Traits\HasRoles;
 
 
- class User extends Authenticatable  implements MustVerifyEmail, Auditable
+ class User extends Authenticatable  implements  MustVerifyEmail, Auditable, FilamentUser, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
@@ -114,5 +117,16 @@ namespace App\Models;
      protected function getIsAdminAttribute()
      {
          return $this->hasRole('super_admin');
+     }
+
+
+     public function canAccessFilament(): bool
+     {
+         return $this->hasVerifiedEmail();
+     }
+
+     public function getFilamentAvatarUrl(): ?string
+     {
+         return $this->avatar_url;
      }
  }
