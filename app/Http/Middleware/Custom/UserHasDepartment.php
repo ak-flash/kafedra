@@ -19,7 +19,7 @@ class UserHasDepartment
      */
     public function handle(Request $request, Closure $next)
     {
-        if(! Auth::user()->main_department) {
+        if(Auth::user() && ! Auth::user()->main_department) {
             return redirect()->route('no-department');
         }
 
