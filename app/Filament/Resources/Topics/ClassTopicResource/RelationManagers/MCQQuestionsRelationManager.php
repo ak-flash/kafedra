@@ -2,36 +2,37 @@
 
 namespace App\Filament\Resources\Topics\ClassTopicResource\RelationManagers;
 
+use App\Models\MCQ\Question;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\AttachAction;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class QuaeresRelationManager extends RelationManager
+class MCQQuestionsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'quaeres';
+    protected static string $relationship = 'questions';
 
     protected static ?string $recordTitleAttribute = 'question';
 
-    protected static ?string $title = 'Вопросы для занятия';
+    protected static ?string $title = 'Тесты';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('question')
-                    ->label('Вопрос')
-                    ->required()
-                    ->maxLength(255),
+
             ]);
     }
 
 
     public static function table(Table $table): Table
     {
+
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('question')
@@ -41,20 +42,30 @@ class QuaeresRelationManager extends RelationManager
                 Tables\Filters\TrashedFilter::make()
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
+                Tables\Actions\AttachAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['user_id'] = auth()->id();
                         return $data;
-                    })->size('sm'),
+                    })
+                    ->form(fn (AttachAction $action): array => [
+
+                        Forms\Components\Select::make('recordId')
+                            ->label('Вопрос')
+                            ->options(function (RelationManager $livewire) {
+
+                                $sectionId = $livewire->ownerRecord->discipline->section->id;
+
+                                return Question::where('section_id', $sectionId)->pluck('question', 'id');
+                            })
+                            ->required(),
+
+                    ]),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\DetachAction::make(),
             ])
             ->bulkActions([
-
+                Tables\Actions\DetachBulkAction::make(),
             ]);
     }
 

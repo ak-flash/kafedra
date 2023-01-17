@@ -41,11 +41,15 @@
                 <div class="mb-4">
 
                     <div class="flex items-center space-x-4 font-semibold">
-                        {{ $loop->iteration }}) {{ $question['question'] }}
+                        {{ $loop->iteration }})
+                        <span class="text-xs px-1">
+                            {{ $question['id'] }}.
+                        </span>
+                        {{ $question['question'] }}
                     </div>
 
                     @foreach($question['answers'] as $key => $answer)
-                        <div class="flex items-center space-x-4 pl-4 {{ in_array($key,$question['correct']) ? 'text-green-700 font-semibold' : '' }}">
+                        <div class="flex items-center space-x-4 pl-4 {{ in_array($key,[$question['correct']]) ? 'text-green-700 font-semibold' : '' }}">
                             {{ $loop->iteration }}) {{ $answer }}
                         </div>
                     @endforeach

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
+use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class UserResource extends Resource
 {
@@ -23,6 +24,8 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static ?string $label = 'Сотрудники';
 
     protected static ?string $navigationLabel = 'Пользователи';
 
@@ -76,15 +79,20 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('№')->toggleable(),
+                Tables\Columns\TextColumn::make('id')
+                    ->label('№')->toggleable(),
 
-                Tables\Columns\TextColumn::make('name')->label('ФИО')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('ФИО')->sortable()->searchable(),
 
-                Tables\Columns\BooleanColumn::make('active')->label('Статус')->sortable(),
+                Tables\Columns\BooleanColumn::make('active')
+                    ->label('Статус')->sortable(),
 
-                Tables\Columns\BadgeColumn::make('roles.name')->label('Роль'),
+                Tables\Columns\BadgeColumn::make('roles.name')
+                    ->label('Роль'),
 
-                Tables\Columns\TextColumn::make('email')->label('Email')->sortable()->searchable()
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email')->sortable()->searchable()
                     ->extraAttributes(fn (User $record): array => ['class' => $record->email_verified_at ? 'text-success-500' : 'line-through text-danger-500']),
 
                 /*\Saadj55\FilamentCopyable\Tables\Columns\CopyableTextColumn::make('email')->label('Email')->sortable()->searchable()
@@ -113,7 +121,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AuditsRelationManager::class,
         ];
     }
 

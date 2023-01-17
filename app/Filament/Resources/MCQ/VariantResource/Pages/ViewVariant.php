@@ -7,6 +7,7 @@ use App\Models\MCQ\Variant;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Pages\Page;
 use Filament\Pages\Actions\Action;
+use Illuminate\Database\Eloquent\Model;
 
 class ViewVariant extends Page
 {
@@ -48,5 +49,6 @@ class ViewVariant extends Page
                 ->modalButton('Скачать'),
         ];
     }
+
 
 }

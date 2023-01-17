@@ -40,7 +40,7 @@ class ImportQuestions extends Page implements HasForms
         //dd(auth()->user()->disciplines_cache->pluck('id'));
         //auth()->user()->departments;
         //dd(ClassTopic::find(1)->discipline);
-dd(auth()->user()->is_admin);
+//dd(auth()->user()->disciplines_cache->where('id', 1)->first()?->section_id);
 
     }
 

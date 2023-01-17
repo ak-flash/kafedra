@@ -19,5 +19,10 @@ class EditLectureTopic extends EditRecord
         ];
     }
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['last_edited_by_id'] = auth()->id();
 
+        return $data;
+    }
 }

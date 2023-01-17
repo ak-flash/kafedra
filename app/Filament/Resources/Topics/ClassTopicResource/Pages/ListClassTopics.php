@@ -3,22 +3,19 @@
 namespace App\Filament\Resources\Topics\ClassTopicResource\Pages;
 
 use App\Filament\Resources\Topics\ClassTopicResource;
+use App\Filament\Resources\Topics\LectureTopicResource;
 use App\Models\Topics\ClassTopic;
 use App\Services\EducationService;
-use Filament\Resources\Pages\Page;
 use Filament\Pages\Actions;
-use Filament\Tables;
+use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables;
 
-class ListByDiscipline extends Page implements Tables\Contracts\HasTable
+class ListClassTopics extends ListRecords
 {
-    use Tables\Concerns\InteractsWithTable;
-
     protected static string $resource = ClassTopicResource::class;
-
-    protected static string $view = 'filament.resources.topics.class-topic-resource.pages.list-by-discipline';
 
     protected static ?string $title = 'Темы занятий';
 
@@ -113,7 +110,9 @@ class ListByDiscipline extends Page implements Tables\Contracts\HasTable
             \App\Filament\Widgets\SelectDiscipline::class,
         ];
     }
+
+    protected function getTableRecordUrlUsing(): \Closure
+    {
+        return fn (Model $record): string => route('filament.resources.topics/class-topics.edit', ['record' => $record]);
+    }
 }
-
-
-

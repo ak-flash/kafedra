@@ -25,6 +25,8 @@ class ClassTopicResource extends Resource
 
     protected static ?string $navigationLabel = 'Темы занятий';
 
+    public static ?string $label = 'Занятия';
+
     protected static ?string $navigationGroup = 'Кафедра';
 
 
@@ -32,54 +34,21 @@ class ClassTopicResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-
-                Forms\Components\Card::make()
-                    ->schema([
-
-                        Forms\Components\TextInput::make('title')
-                            ->label('Название')
-                            ->required()
-                            ->maxLength(255)
-                        ->columnSpan(2),
-
-                        Forms\Components\Select::make('discipline_id')->label('Дисциплина')
-                            ->options(\App\Services\UserService::getDisciplinesWithFaculties())
-                            ->reactive()
-                            ->required(),
-
-                        Forms\Components\Select::make('semester')
-                            ->label('Семестр')
-                            ->options(function (callable $get) {
-
-                                return self::getSemestersFromDiscipline($get('discipline_id'));
-                            })
-                            ->disabled(fn (callable $get) => is_null($get('discipline_id')))
-                            ->default(0)
-                            ->required(),
-
-
-                            Forms\Components\Textarea::make('description')
-                                ->label('Короткое описание')
-                                ->maxLength(500)
-                                ->helperText('Не обязательно заполнять')
-                                ->columnSpan(2),
-                        ])->columns(2),
-
-            ]);
+            ->schema(EducationService::getTopicForm($editDuration = true));
     }
 
     public static function getRelations(): array
     {
         return [
-            RelationManagers\QuaeresRelationManager::class
+            RelationManagers\QuaeresRelationManager::class,
+            RelationManagers\MCQQuestionsRelationManager::class
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListByDiscipline::route('/'),
+            'index' => Pages\ListClassTopics::route('/'),
             'create' => Pages\CreateClassTopic::route('/create'),
             'edit' => Pages\EditClassTopic::route('/{record}/edit'),
         ];
@@ -96,10 +65,5 @@ class ClassTopicResource extends Resource
     }
 
 
-    public static function getSemestersFromDiscipline($disciplineId): array
-    {
-        $semesters = auth()->user()->disciplines_cache->where('id', $disciplineId)->first()?->semester;
 
-        return make_options_from_simple_array($semesters);
-    }
 }

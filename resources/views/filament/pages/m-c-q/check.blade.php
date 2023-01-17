@@ -161,7 +161,7 @@
             @if($variant->questions)
 
                 <div class="flex items-center justify-between space-x-4 pb-4">
-                    <x-toggle wire:model="mode"  label="Альтернативный" />
+                    <x-toggle wire:model="mode"  label="Множественный выбор" />
                     <x-button primary label="Очистить" wire:click="clearStudentValues()" spinner="clearStudentValues" />
                 </div>
 
@@ -170,8 +170,14 @@
 
                 @foreach($variant->questions as $key => $question)
                     <div class="flex items-center space-x-4 pb-4">
-                        <div class="font-semibold px-2 lg:text-lg">
-                            {{ ($key + 1) }})
+                        <div class="px-2 lg:text-lg">
+                            <span class="font-semibold">
+                                {{ ($key + 1) }})
+                            </span>
+
+                            <span class="text-sm">
+                                [{{ $question['id'] }}]
+                            </span>
                         </div>
 
                         @for($i = 0; $i < count($question['answers']); $i++)
@@ -191,8 +197,13 @@
                 <div x-data x-init="setAutoFocusNextInput()" id="autojump" class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 items-center gap-4">
                     @foreach($variant->questions as $key => $question)
                         <div class="text-center w-20">
-                            <div class="font-semibold pb-2 lg:text-lg">
-                                {{ ($key + 1) }}
+                            <div class="pb-2 lg:text-lg">
+                                <span class="font-semibold">
+                                    {{ ($key + 1) }}
+                                </span>
+                                <span class="text-sm">
+                                    [{{ $question['id'] }}]
+                                </span>
                             </div>
 
                             <x-input type="number" maxlength="1" wire:model.lazy="studentValues.{{ $question['id'] }}.answers.0" wire:key="value-{{ $question['id'] }}" autocomplete="off" class="form-control text-center w-20 h-14 text-lg lg:text-xl" required />
@@ -221,7 +232,7 @@
 
             <x-card title="Бланк тестирования">
 
-                <div class="grid grid-cols-3 gap-4 items-center">
+                <div class="grid grid-cols-3 gap-4 items-center px-4">
                     <div class="col-span-2 font-semibold text-xl">
                         Вопросы ({{ count($variant->questions) }} шт.)
                     </div>

@@ -10,8 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Model;
 
 class PositionResource extends Resource
 {
@@ -19,7 +18,11 @@ class PositionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
+    protected static ?string $recordTitleAttribute = 'title';
+
     protected static ?string $navigationLabel = 'Должности';
+
+    public static ?string $label = 'Должности';
 
     protected static ?string $navigationGroup = 'Управление';
 
@@ -27,12 +30,27 @@ class PositionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('working_hours_per_year'),
-                Forms\Components\Textarea::make('description')
-                    ->maxLength(65535),
+
+                Forms\Components\Card::make()
+                    ->schema([
+
+                        Forms\Components\TextInput::make('title')
+                            ->label('Название')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('working_hours_per_year')
+                            ->label('Нагрузка (часы)')
+                            ->required()
+                            ->numeric()
+                            ->maxLength(5),
+
+                        Forms\Components\Textarea::make('description')
+                            ->label('Описание')
+                            ->maxLength(1000),
+
+                    ]),
+
             ]);
     }
 
@@ -40,12 +58,23 @@ class PositionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('working_hours_per_year'),
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Название')
+                    ->sortable()->searchable()
+                    ->tooltip(fn (Model $record) => $record->description),
+
+                Tables\Columns\TextColumn::make('working_hours_per_year')
+                    ->label('Нагрузка (часы)')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Создано')
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->dateTime(),
+
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Обновлено')
                     ->dateTime(),
             ])
             ->filters([

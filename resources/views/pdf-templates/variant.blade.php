@@ -75,7 +75,9 @@
                 @forelse($questionsSplit[0] as $question)
                     <div style="padding-bottom: 20px;">
                         <div style="padding-bottom: 5px;">
-                            <b>{{ $loop->iteration }}</b>) <b>{{ $question['question'] }}</b>
+                            <b>{{ $loop->iteration }}</b>)
+                            {{ $question['id'] }}.
+                            <b>{{ $question['question'] }}</b>
                         </div>
 
                         @foreach($question['answers'] as $key => $answer)
@@ -93,7 +95,9 @@
                 @forelse($questionsSplit[1] as $question)
                     <div style="padding-bottom: 20px;">
                         <div style="padding-bottom: 5px;">
-                            <b>{{ $loop->iteration + $half }}</b>) <b>{{ $question['question'] }}</b>
+                            <b>{{ $loop->iteration + $half }}</b>)
+                            {{ $question['id'] }}.
+                            <b>{{ $question['question'] }}</b>
                         </div>
 
                         @foreach($question['answers'] as $key => $answer)

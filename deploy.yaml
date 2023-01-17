@@ -10,8 +10,8 @@ config:
 
 hosts:
   prod:
-    hostname: 'kafedra.ak-vps.ml'
-    deploy_path: '{{base_deploy_path}}/kafedra.ak-vps.ml'
+    hostname: 'vps.clinpharmbook.ru'
+    deploy_path: '{{base_deploy_path}}/kafedra.ak-vps.ru'
     remote_user: ubuntu
     use_relative_symlink: false
     ssh_multiplexing: false

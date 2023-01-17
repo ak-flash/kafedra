@@ -26,21 +26,35 @@ class DepartmentResource extends Resource
 
     protected static ?string $navigationLabel = 'Все кафедры';
 
+    public static ?string $label = 'Кафедры';
+
     protected static ?string $navigationGroup = 'Управление';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(190),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('address')
-                    ->maxLength(65535),
-                Forms\Components\TextInput::make('volgmed_id'),
+
+                Forms\Components\Card::make()
+                    ->schema([
+
+                        Forms\Components\TextInput::make('name')
+                            ->label('Название')
+                            ->required()
+                            ->maxLength(190),
+
+                        Forms\Components\TextInput::make('phone')
+                            ->label('Телефон')
+                            ->tel()
+                            ->maxLength(255),
+
+                        Forms\Components\Textarea::make('address')
+                            ->label('Адреса баз')
+                            ->maxLength(500),
+
+                        Forms\Components\TextInput::make('volgmed_id'),
+
+                    ]),
             ]);
     }
 
@@ -48,13 +62,20 @@ class DepartmentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('address'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Название'),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('Телефон'),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Адреса баз'),
                 Tables\Columns\TextColumn::make('volgmed_id'),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Создано')
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Обновлено')
                     ->dateTime(),
             ])
             ->filters([

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Facades\Filament;
+use App\Filament\Widgets\StatsOverview;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +30,15 @@ class Dashboard extends Page
     protected function getWidgets(): array
     {
         return [
-            \App\Filament\Resources\UserResource\Widgets\UsersStats::class,
+
+        ];
+    }
+
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            StatsOverview::class
         ];
     }
 }

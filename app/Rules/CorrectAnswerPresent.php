@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use Closure;
 use Illuminate\Contracts\Validation\InvokableRule;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
@@ -12,10 +13,10 @@ class CorrectAnswerPresent implements InvokableRule
      *
      * @param  string  $attribute
      * @param  mixed  $value
-     * @param  \Closure(string): PotentiallyTranslatedString  $fail
+     * @param  Closure(string): PotentiallyTranslatedString  $fail
      * @return void
      */
-    public function __invoke($attribute, $value, $fail)
+    public function __invoke($attribute, $value, $fail): void
     {
         $correctAnswerPresent = false;
 

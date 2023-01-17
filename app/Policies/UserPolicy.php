@@ -141,4 +141,9 @@ class UserPolicy
         return $user->can('reorder_user');
     }
 
+    public function audit(User $user)
+    {
+        return $user->can('audit');
+    }
+
 }

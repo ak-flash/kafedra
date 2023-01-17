@@ -3,6 +3,7 @@
 namespace App\Models\Common;
 
 use App\Models\User;
+use App\Models\UserDepartment\Discipline;
 use App\Models\UserDepartment\Section;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,5 +29,10 @@ class Department extends Model
     public function sections()
     {
         return $this->hasMany(Section::class);
+    }
+
+    public function disciplines()
+    {
+        return $this->hasMany(Discipline::class);
     }
 }

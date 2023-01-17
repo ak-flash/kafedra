@@ -33,21 +33,6 @@ class AppServiceProvider extends ServiceProvider
                 app(Vite::class)('resources/css/filament.css'),
             );
 
-            /*Filament::registerNavigationItems([
-                NavigationItem::make('Проверка')
-                    ->url(route('filament.resources.m-c-q/variants.check'))
-                    ->icon('heroicon-o-clipboard-check')
-                    ->group('Тесты')
-                    ->isActiveWhen(fn (): bool => request()->routeIs('filament.resources.m-c-q/variants.check'))
-                    ->sort(-1),
-
-                NavigationItem::make('Варианты')
-                    ->url(route('filament.resources.m-c-q/variants.index'))
-                    ->icon('heroicon-o-presentation-chart-line')
-                    ->group('Тесты')
-                    ->isActiveWhen(fn (): bool => request()->routeIs('filament.resources.m-c-q/variants.index'))
-                    ->sort(-1),
-            ]);*/
         });
 
 

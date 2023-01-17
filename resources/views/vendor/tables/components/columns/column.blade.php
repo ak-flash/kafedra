@@ -1,20 +1,26 @@
 @props([
-    'action' => null,
-    'alignment' => null,
+    'column',
     'isClickDisabled' => false,
-    'name',
     'record',
     'recordAction' => null,
+    'recordKey' => null,
     'recordUrl' => null,
-    'shouldOpenUrlInNewTab' => false,
-    'tooltip' => null,
-    'url' => null,
 ])
 
-<td
+@php
+    $action = $column->getAction();
+    $alignment = $column->getAlignment();
+    $name = $column->getName();
+    $shouldOpenUrlInNewTab = $column->shouldOpenUrlInNewTab();
+    $tooltip = $column->getTooltip();
+    $url = $column->getUrl();
+
+    $slot = $column->viewData(['recordKey' => $recordKey]);
+@endphp
+
+<div
     {{ $attributes->class([
-        'filament-tables-cell',
-        'dark:text-white' => config('tables.dark_mode'),
+        'filament-tables-column-wrapper',
         match ($alignment) {
             'left' => 'text-left',
             'center' => 'text-center',
@@ -39,17 +45,17 @@
         </a>
     @elseif ($action || $recordAction)
         @php
-            if ($action) {
-                $wireClickAction = "callTableColumnAction('{$name}', '%s')";
+            if ($action instanceof \Filament\Tables\Actions\Action) {
+                $wireClickAction = "mountTableAction('{$action->getName()}', '{$recordKey}')";
+            } elseif ($action) {
+                $wireClickAction = "callTableColumnAction('{$name}', '{$recordKey}')";
             } else {
                 if ($this->getCachedTableAction($recordAction)) {
-                    $wireClickAction = "mountTableAction('{$recordAction}', '%s')";
+                    $wireClickAction = "mountTableAction('{$recordAction}', '{$recordKey}')";
                 } else {
-                    $wireClickAction = "{$recordAction}('%s')";
+                    $wireClickAction = "{$recordAction}('{$recordKey}')";
                 }
             }
-
-            $wireClickAction = sprintf($wireClickAction, $this->getTableRecordKey($record));
         @endphp
 
         <button
@@ -65,4 +71,4 @@
     @else
         {{ $slot }}
     @endif
-</td>
+</div>

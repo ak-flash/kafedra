@@ -118,4 +118,9 @@ class ListByDiscipline extends Page implements Tables\Contracts\HasTable
             \App\Filament\Widgets\SelectDiscipline::class,
         ];
     }
+
+    protected function getTableRecordUrlUsing(): \Closure
+    {
+        return fn (Model $record): string => route('filament.resources.m-c-q/variants.view', ['record' => $record]);
+    }
 }

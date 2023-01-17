@@ -1,6 +1,6 @@
 <x-filament::page>
 
-    <div class="p-4 bg-white rounded-md">
+    <div class="p-4 bg-white rounded-xl">
         <div class="">
             Добро пожаловать,
         </div>
@@ -11,6 +11,7 @@
         <div class="my-4">
             Вы являетесь сотрудником:
         </div>
+
         @forelse(auth()->user()->departments->sortBy('volume') as $department)
             <div class="px-4 pb-2">
                 <span class="font-semibold lg:text-xl">

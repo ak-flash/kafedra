@@ -34,7 +34,7 @@ class QuestionResource extends Resource
 
     protected static ?string $navigationLabel = 'Вопросы';
 
-    public static ?string $label = 'Вопросы';
+    public static ?string $label = 'Вопросы тестов';
 
     protected static ?string $navigationGroup = 'Тесты';
 
@@ -126,10 +126,16 @@ class QuestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('№')->toggleable()->sortable()->searchable()->extraAttributes(fn (Model $record) => $record->deleted_at ? ['class' => 'bg-red-100 text-center'] : ['class' => 'text-center']),
+                Tables\Columns\TextColumn::make('id')
+                    ->label('№')
+                    ->toggleable()->sortable()->searchable()
+                    ->extraAttributes(fn (Model $record) => $record->deleted_at ? ['class' => 'bg-red-100 text-center'] : ['class' => 'text-center']),
 
-                Tables\Columns\TextColumn::make('question')->label('Вопрос / Кол-во ответов')->wrap()->sortable()->searchable()
-                    ->tooltip(fn (Model $record) => self::getAnswers($record))->description(fn (Model $record) => self::getAnswersCount($record)),
+                Tables\Columns\TextColumn::make('question')
+                    ->label('Вопрос / Кол-во ответов')
+                    ->wrap()->sortable()->searchable()
+                    ->tooltip(fn (Model $record) => self::getAnswers($record))
+                    ->description(fn (Model $record) => self::getAnswersCount($record)),
 
                 Tables\Columns\TextColumn::make('class_topics_count')->label('Занятия')
                     ->counts('class_topics')
@@ -147,9 +153,13 @@ class QuestionResource extends Resource
             ])
             ->filters([
 
+                Tables\Filters\SelectFilter::make('section_id')
+                    ->label('Разделы')
+                    ->options(\App\Services\UserService::getSectionsFromCache()->pluck('name', 'id')),
 
                 Tables\Filters\Filter::make('attachedToDiscipline')
                     ->form([
+
                         Forms\Components\Select::make('discipline')
                             ->label('Дисциплина')
                             ->options(\App\Services\UserService::getDisciplinesWithFaculties())

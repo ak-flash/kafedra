@@ -9,6 +9,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SectionResource extends Resource
@@ -18,6 +19,8 @@ class SectionResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationLabel = 'Разделы';
+
+    protected static ?string $label = 'Разделы';
 
     protected static ?string $navigationGroup = 'Кафедра';
 
@@ -52,15 +55,17 @@ class SectionResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\TextColumn::make('name')->label('Название'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Название')
+                    ->tooltip(fn (Model $record) => $record->description),
 
                 Tables\Columns\TextColumn::make('department.name')
                     ->label('Кафедра'),
 
-
-
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()->label('Обновлено'),
+                    ->label('Обновлено')
+                    ->dateTime(),
+
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

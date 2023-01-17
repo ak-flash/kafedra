@@ -8,6 +8,8 @@ use App\Models\MCQ\Question;
 use App\Models\MCQ\Variant;
 use App\Models\User;
 use App\Models\UserDepartment\Discipline;
+use App\Models\UserDepartment\Section;
+use App\Services\UserService;
 use App\Traits\AuthorEditorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -76,4 +78,5 @@ class ClassTopic extends Model implements Auditable
     {
         return $this->hasMany(Variant::class);
     }
+
 }

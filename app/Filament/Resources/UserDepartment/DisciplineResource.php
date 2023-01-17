@@ -24,10 +24,13 @@ class DisciplineResource extends Resource
 
     protected static ?string $navigationLabel = 'Дисциплины';
 
+    protected static ?string $label = 'Дисциплины';
+
     protected static ?string $navigationGroup = 'Кафедра';
 
     public static function form(Form $form): Form
     {
+
         return $form
             ->schema([
 
@@ -55,6 +58,17 @@ class DisciplineResource extends Resource
                             ->options(EducationService::getFaculties()->pluck('speciality', 'id'))
                             ->required(),
 
+
+                        Forms\Components\Select::make('semester')
+                            ->label('Семестр(ы)')
+                            ->multiple()
+                            ->options(make_options_from_simple_array(
+                                [
+                                    1,2,3,4,5,6,7,8,9,10,11,12
+                                ]
+                            )),
+
+
                         Forms\Components\Textarea::make('description')
                             ->label('Короткое описание')
                             ->maxLength(500)
@@ -79,7 +93,9 @@ class DisciplineResource extends Resource
                     ->formatStateUsing(fn (string $state): string => EducationService::getCourseNumber($state))
                     ->description(fn (Model $record): string => implode(', ', $record->semester).' семестр'),
 
-                Tables\Columns\TextColumn::make('faculty.tag')->label('Факультет')
+                Tables\Columns\TextColumn::make('faculty.tag')
+                    ->label('Факультет')
+                    ->extraAttributes(fn (Model $record) => ['class' => 'bg-'.$record->faculty->color.'-200'])
                     ->description(fn (Model $record): string => $record->faculty->speciality)->sortable(),
 
                 Tables\Columns\TextColumn::make('updated_at')->label('Обновлено')->dateTime()->toggleable()

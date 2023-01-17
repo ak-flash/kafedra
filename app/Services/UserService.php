@@ -12,7 +12,7 @@ class UserService {
     {
         return Cache::tags(['disciplinesList'])->rememberForever('User.'.auth()->id().'.DisciplinesList', function () {
 
-            $disciplines = auth()->user()->disciplines()->with('faculty:id,speciality')->get(['disciplines.name', 'disciplines.id', 'faculty_id', 'semester']);
+            $disciplines = auth()->user()->disciplines()->with('faculty:id,speciality')->get(['disciplines.name', 'disciplines.id', 'faculty_id', 'semester', 'section_id']);
 
             $disciplinesOptions = [];
 

@@ -20,7 +20,7 @@ class Discipline extends Model implements Auditable
         'name', 'short_name', 'description',
         'department_id', 'faculty_id', 'semester',
         'last_class_id', 'credit_hours', 'credit_zet',
-        'volgmed_id',
+        'volgmed_id','section_id',
     ];
 
     protected $casts = [
@@ -35,6 +35,11 @@ class Discipline extends Model implements Auditable
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 
     public function class_topics()
