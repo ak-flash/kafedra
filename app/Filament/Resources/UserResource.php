@@ -27,7 +27,7 @@ class UserResource extends Resource
 
     public static ?string $label = 'Сотрудники';
 
-    protected static ?string $navigationLabel = 'Пользователи';
+    protected static ?string $navigationLabel = 'Сотрудники';
 
     protected static ?string $navigationGroup = 'Управление';
 

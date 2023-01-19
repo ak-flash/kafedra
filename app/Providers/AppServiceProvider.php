@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Filament\Facades\Filament;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Foundation\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,7 +34,20 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
-
+        Filament::serving(function () {
+            Filament::registerNavigationGroups([
+                NavigationGroup::make()
+                    ->label('Тесты'),
+                NavigationGroup::make()
+                    ->label('Кафедра')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Управление'),
+                NavigationGroup::make()
+                    ->label('Сервер')
+                    ->collapsed(),
+            ]);
+        });
 
     }
 }

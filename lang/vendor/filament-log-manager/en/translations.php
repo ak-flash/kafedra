@@ -2,7 +2,7 @@
 
 return [
     'navigation_label' => 'Журнал ошибок',
-    'navigation_group' => 'Настройки',
+    'navigation_group' => 'Сервер',
     'title' => 'Журнал',
     'search_placeholder' => 'Select or search a log file',
     'no_logs' => 'Нет сообщений для отображения',

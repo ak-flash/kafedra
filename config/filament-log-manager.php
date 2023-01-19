@@ -8,7 +8,7 @@ return [
      * Set true to display navigation item in the group.
      * You can set the name of the navigation in the translation file.
      */
-    'navigation_group' => true,
+    'navigation_group' => false,
 
     /**
      * Navigation icon.

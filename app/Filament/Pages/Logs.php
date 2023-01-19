@@ -127,4 +127,9 @@ class Logs extends Page
     {
         return Cache::get('logsErrorCount', 0);
     }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return Cache::get('logsErrorCount', 0) > 1 ? 'danger' : 'primary';
+    }
 }
