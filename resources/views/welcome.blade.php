@@ -13,7 +13,7 @@
             </div>
 
             <div class="mt-6 flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4">
-                <a href="/admin/" class="transform rounded-md bg-indigo-600/95 px-5 py-3 font-medium text-white transition-colors hover:bg-indigo-700 inline-flex justify-center">
+                <a href="{{ route("filament.auth.login") }}" class="transform rounded-md bg-indigo-600/95 px-5 py-3 font-medium text-white transition-colors hover:bg-indigo-700 inline-flex justify-center">
                     <x-icon name="login" class="w-5 mr-2" />
                     Войти
                 </a>
