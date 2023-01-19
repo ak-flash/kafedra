@@ -9,6 +9,7 @@ use Filament\Pages\Page;
 use FilipFonal\FilamentLogManager\LogViewer;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -21,7 +22,6 @@ class Logs extends Page
     use HasPageShield;
 
     protected static string $view = 'filament-log-manager::pages.logs';
-    private static int $logsCount = 0;
 
     public ?string $logFile = 'laravel.log';
     public ?string $file = null;
@@ -44,7 +44,7 @@ class Logs extends Page
 
         if (File::exists($this->file)) {
             $logs = LogViewer::getAllForFile($this->logFile);
-            self::$logsCount = count($logs);
+            Cache::put('logsErrorCount', count($logs));
         }
 
         return collect($logs);
@@ -73,6 +73,8 @@ class Logs extends Page
 
         if (File::delete($this->file)) {
             $this->logFile = null;
+
+            Cache::forget('logsErrorCount');
 
             return true;
         }
@@ -123,6 +125,6 @@ class Logs extends Page
 
     protected static function getNavigationBadge(): ?string
     {
-        return self::$logsCount;
+        return Cache::get('logsErrorCount', 0);
     }
 }

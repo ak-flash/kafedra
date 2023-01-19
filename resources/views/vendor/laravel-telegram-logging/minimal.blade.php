@@ -1,2 +1,3 @@
-<b>{{ $appName }}</b> ({{ $level_name }})
-{{ config('app.url').config('app.logger_viewer_path') }}
+<b>{{ $level_name }}</b> ({{ $appName }})
+{{ $formatted }}
+Подробнее: {{ config('app.url').config('app.logger_viewer_path') }}

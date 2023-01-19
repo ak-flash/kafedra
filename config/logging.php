@@ -120,7 +120,7 @@ return [
 
         'telegram' => [
             'driver' => 'custom',
-            'via'    => Logger\TelegramLogger::class,
+            'via'    => App\Telegram\TelegramLoggerCustom::class,
             'level'  => 'debug',
         ]
     ],
