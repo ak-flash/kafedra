@@ -4,7 +4,6 @@ namespace App\Filament\Pages\MCQ;
 
 use App\Models\MCQ\Variant;
 use App\Models\Topics\ClassTopic;
-use App\Services\UserService;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Pages\Page;
 

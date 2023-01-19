@@ -7,15 +7,13 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
-class Variant extends Model implements Auditable, Sortable
+class Variant extends Model implements Sortable
 {
     use HasFactory;
     use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
     use SortableTrait;
 
     protected $fillable = [

@@ -3,6 +3,7 @@
 namespace App\Policies\UserDepartment;
 
 use App\Models\User;
+use App\Models\UserDepartment\Classroom;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ClassroomPolicy
@@ -24,9 +25,10 @@ class ClassroomPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\UserDepartment\Classroom  $classroom
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user, Classroom $classroom)
     {
         return $user->can('view_user::department::classroom');
     }
@@ -46,9 +48,10 @@ class ClassroomPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\UserDepartment\Classroom  $classroom
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, Classroom $classroom)
     {
         return $user->can('update_user::department::classroom');
     }
@@ -57,9 +60,10 @@ class ClassroomPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\UserDepartment\Classroom  $classroom
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, Classroom $classroom)
     {
         return $user->can('delete_user::department::classroom');
     }
@@ -79,9 +83,10 @@ class ClassroomPolicy
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\UserDepartment\Classroom  $classroom
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user)
+    public function forceDelete(User $user, Classroom $classroom)
     {
         return $user->can('force_delete_user::department::classroom');
     }
@@ -101,9 +106,10 @@ class ClassroomPolicy
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\UserDepartment\Classroom  $classroom
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user)
+    public function restore(User $user, Classroom $classroom)
     {
         return $user->can('restore_user::department::classroom');
     }
@@ -120,12 +126,13 @@ class ClassroomPolicy
     }
 
     /**
-     * Determine whether the user can bulk restore.
+     * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\UserDepartment\Classroom  $classroom
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user)
+    public function replicate(User $user, Classroom $classroom)
     {
         return $user->can('replicate_user::department::classroom');
     }

@@ -53,7 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => env('LOG_CHANNEL_STACK'),
             'ignore_exceptions' => false,
         ],
 
@@ -117,6 +117,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'telegram' => [
+            'driver' => 'custom',
+            'via'    => Logger\TelegramLogger::class,
+            'level'  => 'debug',
+        ]
     ],
 
 ];

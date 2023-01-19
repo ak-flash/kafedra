@@ -17,13 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/no-department', function () {
+Route::get('/dashboard/no-department', function () {
     return view('errors.no-department');
 })
     ->middleware(['auth:web'])
     ->name('no-department');
 
-Route::prefix('/admin/')
+Route::prefix('/dashboard/')
     ->middleware(['auth:web','verified'])
     ->group(function () {
 

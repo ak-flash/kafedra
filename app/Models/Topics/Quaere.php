@@ -6,16 +6,13 @@ use App\Traits\AuthorEditorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Tags\HasTags;
 
-class Quaere extends Model implements Auditable
+class Quaere extends Model
 {
     use HasFactory;
     use HasTags;
     use SoftDeletes;
-
-    use \OwenIt\Auditing\Auditable;
     use AuthorEditorTrait;
 
     protected $fillable = [

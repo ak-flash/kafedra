@@ -3,6 +3,7 @@
 namespace App\Policies\Common;
 
 use App\Models\User;
+use App\Models\Common\Position;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PositionPolicy
@@ -24,9 +25,10 @@ class PositionPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Common\Position  $position
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user, Position $position)
     {
         return $user->can('view_common::position');
     }
@@ -46,9 +48,10 @@ class PositionPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Common\Position  $position
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, Position $position)
     {
         return $user->can('update_common::position');
     }
@@ -57,9 +60,10 @@ class PositionPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Common\Position  $position
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, Position $position)
     {
         return $user->can('delete_common::position');
     }
@@ -79,9 +83,10 @@ class PositionPolicy
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Common\Position  $position
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user)
+    public function forceDelete(User $user, Position $position)
     {
         return $user->can('force_delete_common::position');
     }
@@ -101,9 +106,10 @@ class PositionPolicy
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Common\Position  $position
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user)
+    public function restore(User $user, Position $position)
     {
         return $user->can('restore_common::position');
     }
@@ -120,12 +126,13 @@ class PositionPolicy
     }
 
     /**
-     * Determine whether the user can bulk restore.
+     * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Common\Position  $position
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user)
+    public function replicate(User $user, Position $position)
     {
         return $user->can('replicate_common::position');
     }

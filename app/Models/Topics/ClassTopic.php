@@ -2,30 +2,24 @@
 
 namespace App\Models\Topics;
 
-use App\Models\Common\Department;
 use App\Models\Common\Faculty;
 use App\Models\MCQ\Question;
 use App\Models\MCQ\Variant;
-use App\Models\User;
 use App\Models\UserDepartment\Discipline;
-use App\Models\UserDepartment\Section;
-use App\Services\UserService;
 use App\Traits\AuthorEditorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Tags\HasTags;
 
-class ClassTopic extends Model implements Auditable
+class ClassTopic extends Model
 {
     use HasFactory;
     use HasTags;
     use SoftDeletes;
 
     use SortableTrait;
-    use \OwenIt\Auditing\Auditable;
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
     use AuthorEditorTrait;
 

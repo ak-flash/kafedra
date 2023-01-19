@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -140,10 +141,4 @@ class UserPolicy
     {
         return $user->can('reorder_user');
     }
-
-    public function audit(User $user)
-    {
-        return $user->can('audit');
-    }
-
 }

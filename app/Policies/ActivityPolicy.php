@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies\MCQ;
+namespace App\Policies;
 
 use App\Models\User;
-use App\Models\MCQ\Question;
+use Spatie\Activitylog\Models\Activity;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class QuestionPolicy
+class ActivityPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class QuestionPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_m::c::q::question');
+        return $user->can('view_any_activity');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\MCQ\Question  $question
+     * @param  \Spatie\Activitylog\Models\Activity  $activity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Question $question)
+    public function view(User $user, Activity $activity)
     {
-        return $user->can('view_m::c::q::question');
+        return $user->can('view_activity');
     }
 
     /**
@@ -41,31 +41,31 @@ class QuestionPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create_m::c::q::question');
+        return $user->can('create_activity');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\MCQ\Question  $question
+     * @param  \Spatie\Activitylog\Models\Activity  $activity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Question $question)
+    public function update(User $user, Activity $activity)
     {
-        return $user->can('update_m::c::q::question');
+        return $user->can('update_activity');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\MCQ\Question  $question
+     * @param  \Spatie\Activitylog\Models\Activity  $activity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Question $question)
+    public function delete(User $user, Activity $activity)
     {
-        return $user->can('delete_m::c::q::question');
+        return $user->can('delete_activity');
     }
 
     /**
@@ -76,19 +76,19 @@ class QuestionPolicy
      */
     public function deleteAny(User $user)
     {
-        return $user->can('delete_any_m::c::q::question');
+        return $user->can('delete_any_activity');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\MCQ\Question  $question
+     * @param  \Spatie\Activitylog\Models\Activity  $activity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Question $question)
+    public function forceDelete(User $user, Activity $activity)
     {
-        return $user->can('force_delete_m::c::q::question');
+        return $user->can('force_delete_activity');
     }
 
     /**
@@ -99,19 +99,19 @@ class QuestionPolicy
      */
     public function forceDeleteAny(User $user)
     {
-        return $user->can('force_delete_any_m::c::q::question');
+        return $user->can('force_delete_any_activity');
     }
 
     /**
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\MCQ\Question  $question
+     * @param  \Spatie\Activitylog\Models\Activity  $activity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Question $question)
+    public function restore(User $user, Activity $activity)
     {
-        return $user->can('restore_m::c::q::question');
+        return $user->can('restore_activity');
     }
 
     /**
@@ -122,19 +122,19 @@ class QuestionPolicy
      */
     public function restoreAny(User $user)
     {
-        return $user->can('restore_any_m::c::q::question');
+        return $user->can('restore_any_activity');
     }
 
     /**
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\MCQ\Question  $question
+     * @param  \Spatie\Activitylog\Models\Activity  $activity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, Question $question)
+    public function replicate(User $user, Activity $activity)
     {
-        return $user->can('replicate_m::c::q::question');
+        return $user->can('replicate_activity');
     }
 
     /**
@@ -145,7 +145,7 @@ class QuestionPolicy
      */
     public function reorder(User $user)
     {
-        return $user->can('reorder_m::c::q::question');
+        return $user->can('reorder_activity');
     }
 
 }

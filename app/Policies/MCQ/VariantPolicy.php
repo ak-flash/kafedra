@@ -3,8 +3,8 @@
 namespace App\Policies\MCQ;
 
 use App\Models\User;
+use App\Models\MCQ\Variant;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class VariantPolicy
 {
@@ -13,8 +13,8 @@ class VariantPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user)
     {
@@ -24,10 +24,11 @@ class VariantPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\MCQ\Variant  $variant
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user, Variant $variant)
     {
         return $user->can('view_m::c::q::variant');
     }
@@ -35,8 +36,8 @@ class VariantPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user)
     {
@@ -46,10 +47,11 @@ class VariantPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\MCQ\Variant  $variant
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, Variant $variant)
     {
         return $user->can('update_m::c::q::variant');
     }
@@ -57,10 +59,11 @@ class VariantPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\MCQ\Variant  $variant
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, Variant $variant)
     {
         return $user->can('delete_m::c::q::variant');
     }
@@ -68,8 +71,8 @@ class VariantPolicy
     /**
      * Determine whether the user can bulk delete.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function deleteAny(User $user)
     {
@@ -79,10 +82,11 @@ class VariantPolicy
     /**
      * Determine whether the user can permanently delete.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\MCQ\Variant  $variant
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user)
+    public function forceDelete(User $user, Variant $variant)
     {
         return $user->can('force_delete_m::c::q::variant');
     }
@@ -90,8 +94,8 @@ class VariantPolicy
     /**
      * Determine whether the user can permanently bulk delete.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDeleteAny(User $user)
     {
@@ -101,10 +105,11 @@ class VariantPolicy
     /**
      * Determine whether the user can restore.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\MCQ\Variant  $variant
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user)
+    public function restore(User $user, Variant $variant)
     {
         return $user->can('restore_m::c::q::variant');
     }
@@ -112,8 +117,8 @@ class VariantPolicy
     /**
      * Determine whether the user can bulk restore.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restoreAny(User $user)
     {
@@ -121,12 +126,13 @@ class VariantPolicy
     }
 
     /**
-     * Determine whether the user can bulk restore.
+     * Determine whether the user can replicate.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\MCQ\Variant  $variant
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user)
+    public function replicate(User $user, Variant $variant)
     {
         return $user->can('replicate_m::c::q::variant');
     }
@@ -134,8 +140,8 @@ class VariantPolicy
     /**
      * Determine whether the user can reorder.
      *
-     * @param User $user
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function reorder(User $user)
     {

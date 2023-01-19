@@ -3,6 +3,7 @@
 namespace App\Policies\Topics;
 
 use App\Models\User;
+use App\Models\Topics\ClassTopic;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ClassTopicPolicy
@@ -24,9 +25,10 @@ class ClassTopicPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user, ClassTopic $classTopic)
     {
         return $user->can('view_topics::class::topic');
     }
@@ -46,9 +48,10 @@ class ClassTopicPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, ClassTopic $classTopic)
     {
         return $user->can('update_topics::class::topic');
     }
@@ -57,9 +60,10 @@ class ClassTopicPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, ClassTopic $classTopic)
     {
         return $user->can('delete_topics::class::topic');
     }
@@ -79,9 +83,10 @@ class ClassTopicPolicy
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user)
+    public function forceDelete(User $user, ClassTopic $classTopic)
     {
         return $user->can('force_delete_topics::class::topic');
     }
@@ -101,9 +106,10 @@ class ClassTopicPolicy
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user)
+    public function restore(User $user, ClassTopic $classTopic)
     {
         return $user->can('restore_topics::class::topic');
     }
@@ -120,12 +126,13 @@ class ClassTopicPolicy
     }
 
     /**
-     * Determine whether the user can bulk restore.
+     * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user)
+    public function replicate(User $user, ClassTopic $classTopic)
     {
         return $user->can('replicate_topics::class::topic');
     }

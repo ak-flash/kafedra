@@ -14,21 +14,18 @@ namespace App\Models;
  use Illuminate\Database\Eloquent\SoftDeletes;
  use Filament\Models\Contracts\FilamentUser;
  use Illuminate\Foundation\Auth\User as Authenticatable;
-
  use Illuminate\Notifications\Notifiable;
  use Laravel\Sanctum\HasApiTokens;
- use OwenIt\Auditing\Contracts\Auditable;
  use Spatie\Permission\Traits\HasRoles;
 
 
- class User extends Authenticatable  implements  MustVerifyEmail, Auditable, FilamentUser, HasAvatar
+ class User extends Authenticatable  implements  MustVerifyEmail, FilamentUser, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
     use SoftDeletes;
 
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
-    use \OwenIt\Auditing\Auditable;
 
 
     /**

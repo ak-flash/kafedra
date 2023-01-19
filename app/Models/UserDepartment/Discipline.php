@@ -8,13 +8,12 @@ use App\Models\Topics\ClassTopic;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class Discipline extends Model implements Auditable
+
+class Discipline extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'name', 'short_name', 'description',
