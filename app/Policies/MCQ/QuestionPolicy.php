@@ -16,9 +16,9 @@ class QuestionPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        return $user->can('view_any_m::c::q::question');
+        return $user->can('view_any_kafedra::question');
     }
 
     /**
@@ -28,9 +28,9 @@ class QuestionPolicy
      * @param  \App\Models\MCQ\Question  $question
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Question $question)
+    public function view(User $user, Question $question): bool
     {
-        return $user->can('view_m::c::q::question');
+        return $user->can('view_kafedra::question');
     }
 
     /**
@@ -39,9 +39,9 @@ class QuestionPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return $user->can('create_m::c::q::question');
+        return $user->can('create_kafedra::question');
     }
 
     /**
@@ -51,9 +51,9 @@ class QuestionPolicy
      * @param  \App\Models\MCQ\Question  $question
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Question $question)
+    public function update(User $user, Question $question): bool
     {
-        return $user->can('update_m::c::q::question');
+        return $user->can('update_kafedra::question');
     }
 
     /**
@@ -63,9 +63,9 @@ class QuestionPolicy
      * @param  \App\Models\MCQ\Question  $question
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Question $question)
+    public function delete(User $user, Question $question): bool
     {
-        return $user->can('delete_m::c::q::question');
+        return $user->can('delete_kafedra::question');
     }
 
     /**
@@ -74,9 +74,9 @@ class QuestionPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_m::c::q::question');
+        return $user->can('delete_any_kafedra::question');
     }
 
     /**
@@ -86,9 +86,9 @@ class QuestionPolicy
      * @param  \App\Models\MCQ\Question  $question
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Question $question)
+    public function forceDelete(User $user, Question $question): bool
     {
-        return $user->can('force_delete_m::c::q::question');
+        return $user->can('force_delete_kafedra::question');
     }
 
     /**
@@ -97,9 +97,9 @@ class QuestionPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDeleteAny(User $user)
+    public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_m::c::q::question');
+        return $user->can('force_delete_any_kafedra::question');
     }
 
     /**
@@ -109,9 +109,9 @@ class QuestionPolicy
      * @param  \App\Models\MCQ\Question  $question
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Question $question)
+    public function restore(User $user, Question $question): bool
     {
-        return $user->can('restore_m::c::q::question');
+        return $user->can('restore_kafedra::question');
     }
 
     /**
@@ -120,9 +120,9 @@ class QuestionPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restoreAny(User $user)
+    public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_m::c::q::question');
+        return $user->can('restore_any_kafedra::question');
     }
 
     /**
@@ -132,9 +132,9 @@ class QuestionPolicy
      * @param  \App\Models\MCQ\Question  $question
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, Question $question)
+    public function replicate(User $user, Question $question): bool
     {
-        return $user->can('replicate_m::c::q::question');
+        return $user->can('replicate_kafedra::question');
     }
 
     /**
@@ -143,9 +143,9 @@ class QuestionPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function reorder(User $user)
+    public function reorder(User $user): bool
     {
-        return $user->can('reorder_m::c::q::question');
+        return $user->can('reorder_kafedra::question');
     }
 
 }

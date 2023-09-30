@@ -44,7 +44,18 @@ return [
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
-
+        'selfhosted' => [
+            'transport' => 'smtp',
+            'host' => env('SELFHOSTED_MAIL_HOST', 'smtp.mailgun.org'),
+            'port' => env('SELFHOSTED_MAIL_PORT', 587),
+            'encryption' => env('SELFHOSTED_MAIL_ENCRYPTION', 'tls'),
+            'username' => env('SELFHOSTED_MAIL_USERNAME'),
+            'password' => env('SELFHOSTED_MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
         'ses' => [
             'transport' => 'ses',
         ],

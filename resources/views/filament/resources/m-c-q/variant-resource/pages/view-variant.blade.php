@@ -1,6 +1,6 @@
 <x-filament::page>
 
-    <x-card>
+    <x-filament::section>
         <div class="space-y-2 text-gray-800">
             <div class="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-4">
                 <div class="text-lg font-semibold">
@@ -19,19 +19,19 @@
 
 
         </div>
-    </x-card>
+    </x-filament::section>
 
-    <x-card>
+    <x-filament::section>
         <div class="text-lg lg:text-xl">
             Вариант № <b>{{ $record->variant }}</b>
         </div>
         <div class="text-gray-700 text-sm">
             ID: <b class="select-all">{{ $record->id }}</b>
         </div>
-    </x-card>
+    </x-filament::section>
 
 
-    <x-card>
+    <x-filament::section>
         {{--<x-slot name="title">
 
         </x-slot>--}}
@@ -59,7 +59,7 @@
         </div>
 
 
-    </x-card>
+    </x-filament::section>
 
 
 </x-filament::page>

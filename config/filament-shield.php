@@ -2,10 +2,11 @@
 
 return [
     'shield_resource' => [
+        'should_register_navigation' => false,
         'slug' => 'shield/roles',
-        'navigation_sort' => 0,
-        'navigation_badge' => false,
-        'navigation_group' => true,
+        'navigation_sort' => -1,
+        'navigation_badge' => true,
+        'navigation_group' => false,
         'is_globally_searchable' => false,
         'show_model_path' => true,
     ],
@@ -16,7 +17,9 @@ return [
 
     'super_admin' => [
         'enabled' => true,
-        'name'  => 'super_admin',
+        'name' => 'super_admin',
+        'define_via_gate' => false,
+        'intercept_gate' => 'before', // after
     ],
 
     'filament_user' => [
@@ -63,7 +66,7 @@ return [
         ],
 
         'widgets' => [
-            'AccountWidget','FilamentInfoWidget',
+            'AccountWidget', 'FilamentInfoWidget',
         ],
 
         'resources' => [],
@@ -72,4 +75,5 @@ return [
     'register_role_policy' => [
         'enabled' => true,
     ],
+
 ];

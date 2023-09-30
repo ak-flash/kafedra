@@ -4,27 +4,37 @@ namespace App\Models;
 
  use App\Models\Common\Department;
  use App\Models\Common\Position;
- use App\Models\UserDepartment\Discipline;
- use App\Models\UserDepartment\Section;
+ use App\Models\Kafedra\Discipline;
+ use App\Models\Kafedra\Section;
+ use App\Services\FileService;
  use App\Services\UserService;
  use Attribute;
+ use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+ use Filament\Facades\Filament;
  use Filament\Models\Contracts\HasAvatar;
+ use Filament\Models\Contracts\HasTenants;
+ use Filament\Panel;
  use Illuminate\Contracts\Auth\MustVerifyEmail;
  use Illuminate\Database\Eloquent\Factories\HasFactory;
+ use Illuminate\Database\Eloquent\Model;
  use Illuminate\Database\Eloquent\SoftDeletes;
  use Filament\Models\Contracts\FilamentUser;
  use Illuminate\Foundation\Auth\User as Authenticatable;
  use Illuminate\Notifications\Notifiable;
+ use Illuminate\Support\Facades\Storage;
  use Laravel\Sanctum\HasApiTokens;
+ use OwenIt\Auditing\Contracts\Auditable;
  use Spatie\Permission\Traits\HasRoles;
 
 
- class User extends Authenticatable  implements  MustVerifyEmail, FilamentUser, HasAvatar
+ class User extends Authenticatable  implements  MustVerifyEmail, FilamentUser, HasAvatar, Auditable, HasTenants
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
+    use HasPanelShield;
     use SoftDeletes;
 
+    use \OwenIt\Auditing\Auditable;
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 
@@ -36,7 +46,7 @@ namespace App\Models;
     protected $fillable = [
         'name', 'active', 'birth_date',
         'email', 'email_verified_at',
-        'password', 'phone'
+        'password', 'phone', 'profile_photo_path'
 
     ];
 
@@ -60,11 +70,33 @@ namespace App\Models;
         'email_verified_at' => 'datetime',
     ];
 
+     protected $appends = [
+         'profile_photo_url',
+     ];
 
-
-     public function activate()
+     protected static function boot(): void
      {
+         parent::boot();
 
+         /** @var Model $model */
+         static::updating(function ($model) {
+             FileService::deleteOldImage($model, 'profile_photo_path', 'profile-photos');
+         });
+     }
+
+     public function getTenants(Panel $panel): array|\Illuminate\Support\Collection
+     {
+         return $this->departments;
+     }
+
+     public function getSelectedTenant(): ?Model
+     {
+         return Filament::getTenant();
+     }
+
+     public function canAccessTenant(\Illuminate\Database\Eloquent\Model $tenant): bool
+     {
+         return $this->departments->contains($tenant);
      }
 
      public function departments(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -95,21 +127,11 @@ namespace App\Models;
          return $this->hasManyDeep(Section::class, ['department_user', Department::class]);
      }
 
-     public function getSectionsCacheAttribute()
-     {
-         return UserService::getSectionsFromCache();
-     }
-
-
      public function disciplines(): \Staudenmeir\EloquentHasManyDeep\HasManyDeep
      {
          return $this->hasManyDeep(Discipline::class, ['department_user', Department::class]);
      }
 
-     public function getDisciplinesCacheAttribute()
-     {
-         return UserService::getDisciplinesFromCache();
-     }
 
      protected function getIsAdminAttribute()
      {
@@ -117,13 +139,17 @@ namespace App\Models;
      }
 
 
-     public function canAccessFilament(): bool
+     public function canAccessPanel(Panel $panel): bool
      {
          return $this->hasVerifiedEmail();
      }
 
+     public function getProfilePhotoUrlAttribute(): ?string
+     {
+         return $this->getFilamentAvatarUrl();
+     }
      public function getFilamentAvatarUrl(): ?string
      {
-         return $this->avatar_url;
+         return $this->profile_photo_path ? Storage::disk('profile-photos')->url($this->profile_photo_path) : null ;
      }
  }

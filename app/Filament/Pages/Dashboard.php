@@ -35,7 +35,7 @@ class Dashboard extends Page
     }
 
 
-    protected function getHeaderWidgets(): array
+    protected function getFooterWidgets(): array
     {
         return [
             StatsOverview::class

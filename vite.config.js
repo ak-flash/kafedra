@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
 import laravel, { refreshPaths } from 'laravel-vite-plugin'
 import mkcert from'vite-plugin-mkcert'
 import livewire from '@defstudio/vite-livewire-plugin';
@@ -9,7 +9,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/css/filament.css',
+                'resources/css/filament/kafedra/theme.css',
             ],
             refresh: [
                 ...refreshPaths,
@@ -22,9 +22,4 @@ export default defineConfig({
             refresh: ['resources/css/app.css'],
         }),
     ],
-    resolve: {
-        alias: {
-            '@': '/resources/js'
-        }
-    },
-})
+});

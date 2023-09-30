@@ -2,37 +2,41 @@
     "name": "ak-flash/kafedra",
     "type": "project",
     "description": "For management of the university department",
-    "keywords": ["framework", "laravel", "filament"],
+    "keywords": [
+        "framework",
+        "laravel",
+        "filament"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.1",
         "ext-pdo": "*",
         "archtechx/enums": "^0.3.1",
-        "awcodes/filament-quick-create": "^1.0",
+        "awcodes/filament-quick-create": "^3.1",
         "barryvdh/laravel-dompdf": "^2.0",
-        "bezhansalleh/filament-shield": "^2.1",
-        "buildix/timex": "^1.1",
+        "bezhansalleh/filament-exceptions": "^2.0",
+        "bezhansalleh/filament-shield": "*",
         "calebporzio/sushi": "^2.4",
         "doctrine/dbal": "^3.4",
-        "filament/filament": "^2.0",
-        "filament/forms": "^2.0",
-        "filament/notifications": "^2.0",
-        "filament/spatie-laravel-tags-plugin": "^2.0",
-        "filament/tables": "^2.0",
-        "filipfonal/filament-log-manager": "^1.1",
+        "filament/filament": "^3.0-stable",
+        "filament/forms": "^3.0-stable",
+        "filament/notifications": "^3.0-stable",
+        "filament/spatie-laravel-tags-plugin": "^3.0-stable",
+        "filament/tables": "^3.0-stable",
         "grkamil/laravel-telegram-logging": "^1.7",
         "guzzlehttp/guzzle": "^7.2",
-        "jeffgreco13/filament-breezy": "^1.4",
-        "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
+        "laravel/framework": "^10.0",
+        "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.10",
+        "livewire/livewire": "^3.0",
+        "owen-it/laravel-auditing": "^13.0",
         "predis/predis": "^2.0",
-        "saadj55/filament-copyable": "dev-master",
+        "pxlrbt/filament-activity-log": "^1.0",
+        "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-permission": "^5.5",
+        "staudenmeir/belongs-to-through": "^2.5",
         "staudenmeir/eloquent-has-many-deep": "^1.7",
-        "wireui/wireui": "^1.14",
-        "z3d0x/filament-logger": "^0.4.2"
+        "tapp/filament-auditing": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
@@ -41,9 +45,9 @@
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -63,7 +67,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --force --tag=livewire:assets --ansi",
@@ -89,6 +94,6 @@
             "pestphp/pest-plugin": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

@@ -18,7 +18,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        'Spatie\Activitylog\Models\Activity' => 'App\Policies\ActivityPolicy',
     ];
 
     /**
@@ -28,7 +27,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
 
         Gate::guessPolicyNamesUsing(function ($modelClass) {
             // Get model name with sub folder

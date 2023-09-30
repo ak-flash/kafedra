@@ -10,9 +10,13 @@
         <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireStyles
-        @livewireScripts
+
+        @filamentStyles
+        @filamentScripts
+
         @stack('head_scripts')
+
+
     </head>
 
     <body class="antialiased">
@@ -20,6 +24,7 @@
         {{ $slot }}
 
         @stack('scripts')
+
         @livewire('notifications')
 
         <script>
@@ -27,5 +32,6 @@
                 location.reload();
             });
         </script>
+
     </body>
 </html>

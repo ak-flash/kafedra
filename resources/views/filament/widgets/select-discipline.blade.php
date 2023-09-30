@@ -1,22 +1,17 @@
 <x-filament::widget>
-    <x-wire-ui-init />
+    <x-filament::section>
+        <div class="text-sm pb-2">
+            Дисциплина:
+        </div>
+        <x-filament::input.wrapper>
+            <x-filament::input.select wire:model.live="disciplineId">
+                <option value="">Выберите...</option>
+                @forelse($disciplinesList as $value => $name)
+                    <option value="{{ $value }}">{{ $name }}</option>
+                @empty
+                @endforelse
+            </x-filament::input.select>
+        </x-filament::input.wrapper>
 
-    <x-filament::card>
-
-        <x-select
-            label="Выберите ДИСЦИПЛИНУ"
-            placeholder="Выберите..."
-            wire:model="disciplineId"
-            :clearable="false"
-            class="mb-4"
-        >
-            @forelse($disciplinesList as $value => $name)
-                <x-select.option label="{{ $name }}" value="{{ $value }}" />
-            @empty
-
-            @endforelse
-
-        </x-select>
-
-    </x-filament::card>
+    </x-filament::section>
 </x-filament::widget>

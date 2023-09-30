@@ -4,13 +4,13 @@ use App\Filament\Resources;
 
 return [
     'exclude' => [
-        Resources\UserResource::class,
-        Resources\UserDepartment\ClassroomResource::class,
-        Resources\UserDepartment\DisciplineResource::class,
-        Resources\UserDepartment\SectionResource::class,
-        Resources\Common\DepartmentResource::class,
-        Resources\Common\FacultyResource::class,
-        Resources\Common\PositionResource::class,
+        Resources\Admin\UserResource::class,
+        Resources\Kafedra\ClassroomResource::class,
+        Resources\Kafedra\DisciplineResource::class,
+        Resources\Kafedra\SectionResource::class,
+        Resources\Admin\DepartmentResource::class,
+        Resources\Admin\FacultyResource::class,
+        Resources\Admin\PositionResource::class,
         \BezhanSalleh\FilamentShield\Resources\RoleResource::class,
     ]
 ];

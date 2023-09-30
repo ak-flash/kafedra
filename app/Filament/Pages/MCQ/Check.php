@@ -2,9 +2,11 @@
 
 namespace App\Filament\Pages\MCQ;
 
+use App\Models\Kafedra\Discipline;
 use App\Models\MCQ\Variant;
 use App\Models\Topics\ClassTopic;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Facades\Filament;
 use Filament\Pages\Page;
 
 
@@ -12,7 +14,7 @@ class Check extends Page
 {
     use HasPageShield;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-check';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static ?string $navigationLabel = 'Проверка';
 
@@ -37,23 +39,15 @@ class Check extends Page
     public $result = [];
 
     public bool $mode = false;
-    public bool $selectById = false;
     public bool $showResultVariant = false;
 
-    protected $messages = [
+    protected array $messages = [
         'studentValues.*.answers.required' => 'Укажите номер ответа студента',
     ];
 
     public function mount()
     {
-        $disciplines = auth()->user()->disciplines_cache->pluck('id');
-
-        /*$this->variantsList = Variant::whereHas('class_topic.discipline', function ($query) use ($disciplines) {
-            return $query->whereIn('discipline_id', $disciplines);
-        })->pluck('id');*/
-
-        $this->disciplinesList = \App\Services\UserService::getDisciplinesWithFaculties();
-        //dd($this->variants);
+        $this->disciplinesList = Discipline::where('department_id', Filament::getTenant()->id)->get();
     }
 
 
@@ -65,24 +59,19 @@ class Check extends Page
 
         $this->variant = Variant::find($this->variantId);
 
-
-
-        if (empty($this->variant)) {
+        if (empty($this->variant) || $this->checkPermission()) {
             $this->addError('variantId', 'Вариант не найден...');
 
             return;
         }
 
-        if (! in_array($this->variant->class_topic->discipline_id, auth()->user()->disciplines_cache->pluck('id')->toArray())) {
-            $this->variant = null;
-            $this->addError('variantId', 'Ошибка доступа к данному варианту...');
-            return;
-        }
-
-
         $this->fillStudentValues($this->variant->questions);
     }
 
+    public function checkPermission()
+    {
+        return $this->variant->department_id === Filament::getTenant()->id;
+    }
     public function check()
     {
         $this->clearFromEmptyValues();

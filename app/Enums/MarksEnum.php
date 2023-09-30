@@ -27,14 +27,14 @@ enum MarksEnum: int
     case GOOD = 4;
 
     #[Description('Отлично')] #[Color('green')]
-    case EXELLENT = 5;
+    case EXCELLENT = 5;
 
-    public static function getPositive()
+    public static function getPositive(): array
     {
         return [
             MarksEnum::SATISFACTORY->value => MarksEnum::SATISFACTORY->value,
             MarksEnum::GOOD->value => MarksEnum::GOOD->value,
-            MarksEnum::EXELLENT->value => MarksEnum::EXELLENT->value,
+            MarksEnum::EXCELLENT->value => MarksEnum::EXCELLENT->value,
         ];
     }
 
@@ -46,7 +46,7 @@ enum MarksEnum: int
 
             MarksEnum::GOOD->value => MarksEnum::GOOD->value.' - '.MarksEnum::GOOD->description(),
 
-            MarksEnum::EXELLENT->value => MarksEnum::EXELLENT->value.' - '.MarksEnum::EXELLENT->description(),
+            MarksEnum::EXCELLENT->value => MarksEnum::EXCELLENT->value.' - '.MarksEnum::EXCELLENT->description(),
         ];
     }
 }

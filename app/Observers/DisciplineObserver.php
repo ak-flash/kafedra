@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\UserDepartment\Discipline;
+use App\Models\Kafedra\Discipline;
 use Illuminate\Support\Facades\Cache;
 
 class DisciplineObserver
@@ -64,6 +64,6 @@ class DisciplineObserver
 
     public function clearCache(): void
     {
-        Cache::tags('disciplinesUserList')->flush();
+        Cache::tags('disciplinesList')->flush();
     }
 }

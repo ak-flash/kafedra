@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ReClassController;
+use App\Livewire\Reclasses;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/reclass/new', Reclasses::class);
+
 Route::get('/dashboard/no-department', function () {
     return view('errors.no-department');
 })
     ->middleware(['auth:web'])
     ->name('no-department');
+
 
 Route::prefix('/dashboard/')
     ->middleware(['auth:web','verified'])

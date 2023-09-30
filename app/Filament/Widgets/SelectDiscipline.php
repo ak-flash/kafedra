@@ -13,12 +13,12 @@ class SelectDiscipline extends Widget
 
     public function mount()
     {
-        $this->disciplinesList = \App\Services\UserService::getDisciplinesWithFaculties();
+        $this->disciplinesList = \App\Services\EducationService::getDisciplinesWithFaculties();
     }
 
     public function updatedDisciplineId($value)
     {
-        $this->emit('disciplineSelected', $value);
+        $this->dispatch('disciplineSelected', $value);
 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\UserDepartment\Section;
+use App\Models\Kafedra\Section;
 use Illuminate\Support\Facades\Cache;
 
 class SectionObserver

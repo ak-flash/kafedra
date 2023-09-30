@@ -2,25 +2,28 @@
 
 namespace App\Models\Topics;
 
+use App\Models\Common\Department;
 use App\Models\Common\Faculty;
 use App\Models\MCQ\Question;
 use App\Models\MCQ\Variant;
-use App\Models\UserDepartment\Discipline;
+use App\Models\Kafedra\Discipline;
 use App\Traits\AuthorEditorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Tags\HasTags;
 
-class ClassTopic extends Model
+class ClassTopic extends Model implements Sortable
 {
     use HasFactory;
     use HasTags;
     use SoftDeletes;
 
     use SortableTrait;
-    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+
+    use \Znck\Eloquent\Traits\BelongsToThrough;
     use AuthorEditorTrait;
 
     protected $fillable = [
@@ -40,7 +43,7 @@ class ClassTopic extends Model
 
     public function buildSortQuery()
     {
-        return static::query()->where('discipline_id', $this->discipline_id);
+        return static::query()->where('discipline_id', $this->discipline_id)->where('semester', $this->semester);
     }
 
     public function discipline(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -65,7 +68,7 @@ class ClassTopic extends Model
 
     public function department()
     {
-        //return $this->hasOneDeepFromReverse(Department::class, Discipline::class);
+        return $this->belongsToThrough(Department::class, Discipline::class);
     }
 
     public function variants(): \Illuminate\Database\Eloquent\Relations\HasMany

@@ -16,9 +16,9 @@ class VariantPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        return $user->can('view_any_m::c::q::variant');
+        return $user->can('view_any_kafedra::variant');
     }
 
     /**
@@ -28,9 +28,9 @@ class VariantPolicy
      * @param  \App\Models\MCQ\Variant  $variant
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Variant $variant)
+    public function view(User $user, Variant $variant): bool
     {
-        return $user->can('view_m::c::q::variant');
+        return $user->can('view_kafedra::variant');
     }
 
     /**
@@ -39,9 +39,9 @@ class VariantPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return $user->can('create_m::c::q::variant');
+        return $user->can('create_kafedra::variant');
     }
 
     /**
@@ -51,9 +51,9 @@ class VariantPolicy
      * @param  \App\Models\MCQ\Variant  $variant
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Variant $variant)
+    public function update(User $user, Variant $variant): bool
     {
-        return $user->can('update_m::c::q::variant');
+        return $user->can('update_kafedra::variant');
     }
 
     /**
@@ -63,9 +63,9 @@ class VariantPolicy
      * @param  \App\Models\MCQ\Variant  $variant
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Variant $variant)
+    public function delete(User $user, Variant $variant): bool
     {
-        return $user->can('delete_m::c::q::variant');
+        return $user->can('delete_kafedra::variant');
     }
 
     /**
@@ -74,9 +74,9 @@ class VariantPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_m::c::q::variant');
+        return $user->can('delete_any_kafedra::variant');
     }
 
     /**
@@ -86,9 +86,9 @@ class VariantPolicy
      * @param  \App\Models\MCQ\Variant  $variant
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Variant $variant)
+    public function forceDelete(User $user, Variant $variant): bool
     {
-        return $user->can('force_delete_m::c::q::variant');
+        return $user->can('force_delete_kafedra::variant');
     }
 
     /**
@@ -97,9 +97,9 @@ class VariantPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDeleteAny(User $user)
+    public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_m::c::q::variant');
+        return $user->can('force_delete_any_kafedra::variant');
     }
 
     /**
@@ -109,9 +109,9 @@ class VariantPolicy
      * @param  \App\Models\MCQ\Variant  $variant
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Variant $variant)
+    public function restore(User $user, Variant $variant): bool
     {
-        return $user->can('restore_m::c::q::variant');
+        return $user->can('restore_kafedra::variant');
     }
 
     /**
@@ -120,9 +120,9 @@ class VariantPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restoreAny(User $user)
+    public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_m::c::q::variant');
+        return $user->can('restore_any_kafedra::variant');
     }
 
     /**
@@ -132,9 +132,9 @@ class VariantPolicy
      * @param  \App\Models\MCQ\Variant  $variant
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, Variant $variant)
+    public function replicate(User $user, Variant $variant): bool
     {
-        return $user->can('replicate_m::c::q::variant');
+        return $user->can('replicate_kafedra::variant');
     }
 
     /**
@@ -143,9 +143,9 @@ class VariantPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function reorder(User $user)
+    public function reorder(User $user): bool
     {
-        return $user->can('reorder_m::c::q::variant');
+        return $user->can('reorder_kafedra::variant');
     }
 
 }

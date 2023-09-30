@@ -1,65 +1,78 @@
 <x-filament::page>
-    <x-wire-ui-init />
 
-    <div class="p-4 bg-white rounded-lg">
-        <x-toggle label="Поиск по ID варианта" wire:model="selectById" />
 
-        <div class="{{ $selectById ? '' : 'hidden' }} flex items-center space-x-4 mt-4">
+    <x-filament::section>
+        <div class="flex items-center gap-4">
+            <span class="text-sm lg:text-base text-gray-600">
+                ID варианта
+            </span>
+            <x-filament::input.wrapper class="lg:w-44">
+                <x-filament::input
+                    type="text"
+                    wire:model="variantId"
+                    placeholder="Укажите вариант"
 
-                <x-input placeholder="Укажите вариант"
-                         wire:model.lazy="variantId" autocomplete="off" />
+                />
+            </x-filament::input.wrapper>
 
-                <x-button primary icon="check-circle" spinner="loadVariant" wire:click="loadVariant" label="Загрузить" class="" />
-
+            <x-filament::button icon="heroicon-m-check-circle" wire:click="loadVariant">
+                Загрузить
+            </x-filament::button>
         </div>
 
-        <div class="{{ $selectById ? 'hidden' : '' }} flex flex-col lg:flex-row lg:items-center lg:space-x-4 mt-4 w-full">
+        @error('variantId')
+            <div class="mt-4 p-4 bg-red-50 rounded-md">
+                {{ $message }}
+            </div>
+        @enderror
+    </x-filament::section>
+
+
+    {{--<div class="flex flex-col lg:flex-row lg:items-center lg:space-x-4 mt-4 w-full">
+        <x-select
+            label="Дисциплина"
+            placeholder="Выберите..."
+            wire:model.live="disciplineId"
+            :clearable="false"
+            class=""
+        >
+            @forelse($disciplinesList as $value => $name)
+                <x-select.option label="{{ $name }}" value="{{ $value }}" />
+            @empty
+
+            @endforelse
+
+        </x-select>
+
+        @if($disciplineId)
             <x-select
-                label="Дисциплина"
+                label="Занятие"
                 placeholder="Выберите..."
-                wire:model="disciplineId"
-                :clearable="false"
+                wire:model.live="topicId"
                 class=""
             >
-                @forelse($disciplinesList as $value => $name)
-                    <x-select.option label="{{ $name }}" value="{{ $value }}" />
+                @forelse($topicsList as $topic)
+                    <x-select.option label="{{ $topic->sort_order.'. '.$topic->title }}" value="{{ $topic->id }}" />
                 @empty
 
                 @endforelse
-
             </x-select>
+        @endif
 
-            @if($disciplineId)
-                <x-select
-                    label="Занятие"
-                    placeholder="Выберите..."
-                    wire:model="topicId"
-                    class=""
-                >
-                    @forelse($topicsList as $topic)
-                        <x-select.option label="{{ $topic->sort_order.'. '.$topic->title }}" value="{{ $topic->id }}" />
-                    @empty
-
-                    @endforelse
-                </x-select>
-            @endif
-
-            @if($topicId)
-                <x-select
-                    label="Вариант"
-                    placeholder="Выберите..."
-                    wire:model="variantId"
-                    :options="$variantsList"
-                    option-label="name"
-                    option-value="id"
-                    class=""
-                />
-            @endif
-        </div>
+        @if($topicId)
+            <x-select
+                label="Вариант"
+                placeholder="Выберите..."
+                wire:model.live="variantId"
+                :options="$variantsList"
+                option-label="name"
+                option-value="id"
+                class=""
+            />
+        @endif
+    </div>--}}
 
 
-
-    </div>
 
 
 
@@ -80,7 +93,7 @@
             </div>
 
             <div class="border-l-2 border-gray-300 px-4">
-                {{ App\Services\UserService::getDisciplinesWithFaculties()[$variant->class_topic->discipline_id] }}
+                {{ App\Services\EducationService::getDisciplinesWithFaculties()[$variant->class_topic->discipline_id] }}
 
                 <div class="">
                     {{ $variant->class_topic->sort_order }})
@@ -90,8 +103,9 @@
                 </div>
             </div>
 
-            <x-button secondary label="Посмотреть вопросы и ответы" href="{{ route('filament.resources.m-c-q/variants.view', $variant->id) }}" target="_blank" />
-
+            <x-filament::button icon="heroicon-m-check-circle" href="{{ route('filament.kafedra.resources.kafedra.variants.view', [Filament\Facades\Filament::getTenant(), $variant->id]) }}" target="_blank">
+                Посмотреть вопросы и ответы
+            </x-filament::button>
         </div>
 
 
@@ -108,7 +122,9 @@
                         %
                     </div>
 
-                    <x-button primary label="Очистить" wire:click="clearStudentValues()" spinner="clearStudentValues" />
+                    <x-filament::button icon="heroicon-m-check-circle" wire:click="clearStudentValues">
+                        Очистить
+                    </x-filament::button>
                 </div>
 
                 <div class="lg:w-2/3 border border-gray-300 rounded-md divide-y">
@@ -145,7 +161,9 @@
                 </div>
 
                 <div class="mt-4">
-                    <x-button secondary wire:click="openResultModal()" label="Посмотреть ответы студента"  />
+                    <x-filament::button icon="heroicon-m-check-circle" wire:click="openResultModal">
+                        Посмотреть ответы студента
+                    </x-filament::button>
                 </div>
 
             </div>
@@ -161,8 +179,8 @@
             @if($variant->questions)
 
                 <div class="flex items-center justify-between space-x-4 pb-4">
-                    <x-toggle wire:model="mode"  label="Множественный выбор" />
-                    <x-button primary label="Очистить" wire:click="clearStudentValues()" spinner="clearStudentValues" />
+                    {{--<x-toggle wire:model.live="mode"  label="Множественный выбор" />
+                    <x-button primary label="Очистить" wire:click="clearStudentValues()" spinner="clearStudentValues" />--}}
                 </div>
 
 
@@ -181,7 +199,7 @@
                         </div>
 
                         @for($i = 0; $i < count($question['answers']); $i++)
-                            <x-checkbox label="{{ ($i + 1) }}" wire:model="studentValues.{{ $question['id'] }}.answers.{{ $i }}" value="{{ ($i + 1) }}" wire:key="answer-{{ $key }}-{{ $i }}" />
+                            {{--<x-checkbox label="{{ ($i + 1) }}" wire:model.live="studentValues.{{ $question['id'] }}.answers.{{ $i }}" value="{{ ($i + 1) }}" wire:key="answer-{{ $key }}-{{ $i }}" />--}}
                         @endfor
 
                         @error('studentValues.'.$question['id'].'.answers')
@@ -206,7 +224,7 @@
                                 </span>
                             </div>
 
-                            <x-input type="number" maxlength="1" wire:model.lazy="studentValues.{{ $question['id'] }}.answers.0" wire:key="value-{{ $question['id'] }}" autocomplete="off" class="form-control text-center w-20 h-14 text-lg lg:text-xl" required />
+                            {{--<x-input type="number" maxlength="1" wire:model.blur="studentValues.{{ $question['id'] }}.answers.0" wire:key="value-{{ $question['id'] }}" autocomplete="off" class="form-control text-center w-20 h-14 text-lg lg:text-xl" required />--}}
                         </div>
                     @endforeach
 
@@ -215,8 +233,8 @@
 
             @endif
 
-            <x-button wire:click="check" primary icon="check-circle" spinner="check" label="Проверить" class="mt-4" />
-
+            {{--<x-button wire:click="check" primary icon="check-circle" spinner="check" label="Проверить" class="mt-4" />
+--}}
 
 
             @else
@@ -228,7 +246,7 @@
         </div>
 
 
-        <x-modal blur wire:model.defer="showResultVariant">
+        {{--<x-modal blur wire:model="showResultVariant">
 
             <x-card title="Бланк тестирования">
 
@@ -276,7 +294,7 @@
                 </x-slot>
 
             </x-card>
-        </x-modal>
+        </x-modal>--}}
 
     @endif
 

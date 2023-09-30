@@ -2,6 +2,9 @@
 
 namespace App\Models\MCQ;
 
+use App\Models\Common\Department;
+use App\Models\Kafedra\Discipline;
+use App\Models\Kafedra\Section;
 use App\Models\Topics\ClassTopic;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,12 +15,13 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Variant extends Model implements Sortable
 {
-    use HasFactory;
     use SoftDeletes;
     use SortableTrait;
 
+    use \Znck\Eloquent\Traits\BelongsToThrough;
+
     protected $fillable = [
-        'questions', 'class_topic_id', 'user_id', 'variant',
+        'questions', 'department_id', 'class_topic_id', 'user_id', 'variant',
     ];
 
     protected $casts = [
@@ -38,7 +42,7 @@ class Variant extends Model implements Sortable
 
     public function buildSortQuery()
     {
-        return static::query()->where('class_topic_id', $this->class_topic_id);
+        return static::query()->where('department_id', $this->class_topic_id);
     }
 
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -51,5 +55,12 @@ class Variant extends Model implements Sortable
         return $this->belongsTo(ClassTopic::class);
     }
 
-
+    public function discipline()
+    {
+        return $this->belongsToThrough(Discipline::class, ClassTopic::class);
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

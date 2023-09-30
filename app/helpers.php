@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Models\UserDepartment\Discipline;
+use App\Models\Kafedra\Discipline;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

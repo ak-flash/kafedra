@@ -16,9 +16,9 @@ class LectureTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        return $user->can('view_any_topics::lecture::topic');
+        return $user->can('view_any_kafedra::lecture::topic');
     }
 
     /**
@@ -28,9 +28,9 @@ class LectureTopicPolicy
      * @param  \App\Models\Topics\LectureTopic  $lectureTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, LectureTopic $lectureTopic)
+    public function view(User $user, LectureTopic $lectureTopic): bool
     {
-        return $user->can('view_topics::lecture::topic');
+        return $user->can('view_kafedra::lecture::topic');
     }
 
     /**
@@ -39,9 +39,9 @@ class LectureTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return $user->can('create_topics::lecture::topic');
+        return $user->can('create_kafedra::lecture::topic');
     }
 
     /**
@@ -51,9 +51,9 @@ class LectureTopicPolicy
      * @param  \App\Models\Topics\LectureTopic  $lectureTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, LectureTopic $lectureTopic)
+    public function update(User $user, LectureTopic $lectureTopic): bool
     {
-        return $user->can('update_topics::lecture::topic');
+        return $user->can('update_kafedra::lecture::topic');
     }
 
     /**
@@ -63,9 +63,9 @@ class LectureTopicPolicy
      * @param  \App\Models\Topics\LectureTopic  $lectureTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, LectureTopic $lectureTopic)
+    public function delete(User $user, LectureTopic $lectureTopic): bool
     {
-        return $user->can('delete_topics::lecture::topic');
+        return $user->can('delete_kafedra::lecture::topic');
     }
 
     /**
@@ -74,9 +74,9 @@ class LectureTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_topics::lecture::topic');
+        return $user->can('delete_any_kafedra::lecture::topic');
     }
 
     /**
@@ -86,9 +86,9 @@ class LectureTopicPolicy
      * @param  \App\Models\Topics\LectureTopic  $lectureTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, LectureTopic $lectureTopic)
+    public function forceDelete(User $user, LectureTopic $lectureTopic): bool
     {
-        return $user->can('force_delete_topics::lecture::topic');
+        return $user->can('force_delete_kafedra::lecture::topic');
     }
 
     /**
@@ -97,9 +97,9 @@ class LectureTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDeleteAny(User $user)
+    public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_topics::lecture::topic');
+        return $user->can('force_delete_any_kafedra::lecture::topic');
     }
 
     /**
@@ -109,9 +109,9 @@ class LectureTopicPolicy
      * @param  \App\Models\Topics\LectureTopic  $lectureTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, LectureTopic $lectureTopic)
+    public function restore(User $user, LectureTopic $lectureTopic): bool
     {
-        return $user->can('restore_topics::lecture::topic');
+        return $user->can('restore_kafedra::lecture::topic');
     }
 
     /**
@@ -120,9 +120,9 @@ class LectureTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restoreAny(User $user)
+    public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_topics::lecture::topic');
+        return $user->can('restore_any_kafedra::lecture::topic');
     }
 
     /**
@@ -132,9 +132,9 @@ class LectureTopicPolicy
      * @param  \App\Models\Topics\LectureTopic  $lectureTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, LectureTopic $lectureTopic)
+    public function replicate(User $user, LectureTopic $lectureTopic): bool
     {
-        return $user->can('replicate_topics::lecture::topic');
+        return $user->can('replicate_kafedra::lecture::topic');
     }
 
     /**
@@ -143,9 +143,9 @@ class LectureTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function reorder(User $user)
+    public function reorder(User $user): bool
     {
-        return $user->can('reorder_topics::lecture::topic');
+        return $user->can('reorder_kafedra::lecture::topic');
     }
 
 }

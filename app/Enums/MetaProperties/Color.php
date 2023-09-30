@@ -8,7 +8,7 @@ use Attribute;
 #[Attribute]
 class Color extends MetaProperty
 {
-    protected function transform(mixed $value): mixed
+    protected function transform(mixed $value): string
     {
         return "text-{$value}-600";
     }

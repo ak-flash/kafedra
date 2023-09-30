@@ -13,14 +13,21 @@
             </div>
 
             <div class="mt-6 flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4">
-                <a href="{{ route("filament.auth.login") }}" class="transform rounded-md bg-indigo-600/95 px-5 py-3 font-medium text-white transition-colors hover:bg-indigo-700 inline-flex justify-center">
-                    <x-icon name="login" class="w-5 mr-2" />
+                <a href="{{ route("filament.kafedra.auth.login") }}" class="transform rounded-md bg-indigo-600/95 px-5 py-3 font-medium text-white transition-colors hover:bg-indigo-700 inline-flex justify-center">
+                    <x-filament::icon
+                        icon="heroicon-m-arrow-right-on-rectangle"
+                        class="w-5 mr-2"
+                    />
                     Войти
                 </a>
 
                 <a href="#" class="transform rounded-md border border-slate-300 px-5 py-3 font-medium text-slate-900 transition-colors hover:bg-slate-100 inline-flex justify-center">
-                    <x-icon name="clipboard-check" class="w-5 mr-2" />
-                    Отправить заявку на регистрацию</a>
+                    <x-filament::icon
+                        icon="heroicon-m-user-plus"
+                        class="w-5 mr-2"
+                    />
+                    Отправить заявку на регистрацию
+                </a>
             </div>
         </div>
     </section>

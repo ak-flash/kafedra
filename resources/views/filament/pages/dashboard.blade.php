@@ -1,14 +1,44 @@
 <x-filament::page>
 
-    <div class="p-4 bg-white rounded-xl">
-        <div class="">
-            Добро пожаловать,
-        </div>
-        <div class="font-semibold text-lg lg:text-2xl">
-            {{ auth()->user()->name }}
-        </div>
+    <div class="{{ auth()->user()->is_admin ? 'grid lg:grid-cols-2 gap-4 justify-between' : '' }}">
+        <x-filament::section class="flex items-center justify-between">
+            <div class="lg:px-4">
+                <div class="">
+                    Добро пожаловать,
+                </div>
+                <div class="font-semibold lg:text-lg">
+                    {{ auth()->user()->name }}
+                </div>
+            </div>
 
-        <div class="my-4">
+            <div>
+
+            </div>
+        </x-filament::section>
+
+
+
+            @if(auth()->user()->is_admin)
+            <x-filament::section>
+                <x-slot name="heading">
+                    Сервер
+                </x-slot>
+
+                <div class="">
+                    «{{ App::environment() }}» (PHP v{{ PHP_VERSION }})
+                </div>
+                <div class="">
+                    Laravel v.{{ Illuminate\Foundation\Application::VERSION }}
+                </div>
+            </x-filament::section>
+            @endif
+
+    </div>
+
+
+
+    <x-filament::section>
+        <div class="pb-4">
             Вы являетесь сотрудником:
         </div>
 
@@ -19,7 +49,7 @@
                 </span>
 
                 <span>
-                    ({{ \App\Models\Common\Position::POSITIONS_RATE[$department->pivot->volume] ?? 0 }} ставка)
+                    ({{ \App\Services\UserService::getWorkingVolume($department) }} ставка)
                 </span>
             </div>
         @empty
@@ -27,7 +57,7 @@
                 Кафедра не указана
             </div>
         @endforelse
-    </div>
+    </x-filament::section>
 
 
 </x-filament::page>

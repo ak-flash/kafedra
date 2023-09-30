@@ -16,9 +16,9 @@ class ClassTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        return $user->can('view_any_topics::class::topic');
+        return $user->can('view_any_kafedra::class::topic');
     }
 
     /**
@@ -28,9 +28,9 @@ class ClassTopicPolicy
      * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, ClassTopic $classTopic)
+    public function view(User $user, ClassTopic $classTopic): bool
     {
-        return $user->can('view_topics::class::topic');
+        return $user->can('view_kafedra::class::topic');
     }
 
     /**
@@ -39,9 +39,9 @@ class ClassTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return $user->can('create_topics::class::topic');
+        return $user->can('create_kafedra::class::topic');
     }
 
     /**
@@ -51,9 +51,9 @@ class ClassTopicPolicy
      * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, ClassTopic $classTopic)
+    public function update(User $user, ClassTopic $classTopic): bool
     {
-        return $user->can('update_topics::class::topic');
+        return $user->can('update_kafedra::class::topic');
     }
 
     /**
@@ -63,9 +63,9 @@ class ClassTopicPolicy
      * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, ClassTopic $classTopic)
+    public function delete(User $user, ClassTopic $classTopic): bool
     {
-        return $user->can('delete_topics::class::topic');
+        return $user->can('delete_kafedra::class::topic');
     }
 
     /**
@@ -74,9 +74,9 @@ class ClassTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_topics::class::topic');
+        return $user->can('delete_any_kafedra::class::topic');
     }
 
     /**
@@ -86,9 +86,9 @@ class ClassTopicPolicy
      * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, ClassTopic $classTopic)
+    public function forceDelete(User $user, ClassTopic $classTopic): bool
     {
-        return $user->can('force_delete_topics::class::topic');
+        return $user->can('force_delete_kafedra::class::topic');
     }
 
     /**
@@ -97,9 +97,9 @@ class ClassTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDeleteAny(User $user)
+    public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_topics::class::topic');
+        return $user->can('force_delete_any_kafedra::class::topic');
     }
 
     /**
@@ -109,9 +109,9 @@ class ClassTopicPolicy
      * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, ClassTopic $classTopic)
+    public function restore(User $user, ClassTopic $classTopic): bool
     {
-        return $user->can('restore_topics::class::topic');
+        return $user->can('restore_kafedra::class::topic');
     }
 
     /**
@@ -120,9 +120,9 @@ class ClassTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restoreAny(User $user)
+    public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_topics::class::topic');
+        return $user->can('restore_any_kafedra::class::topic');
     }
 
     /**
@@ -132,9 +132,9 @@ class ClassTopicPolicy
      * @param  \App\Models\Topics\ClassTopic  $classTopic
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, ClassTopic $classTopic)
+    public function replicate(User $user, ClassTopic $classTopic): bool
     {
-        return $user->can('replicate_topics::class::topic');
+        return $user->can('replicate_kafedra::class::topic');
     }
 
     /**
@@ -143,9 +143,9 @@ class ClassTopicPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function reorder(User $user)
+    public function reorder(User $user): bool
     {
-        return $user->can('reorder_topics::class::topic');
+        return $user->can('reorder_kafedra::class::topic');
     }
 
 }

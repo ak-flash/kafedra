@@ -2,20 +2,21 @@
 
 namespace App\Models\MCQ;
 
+use App\Models\Common\Department;
+use App\Models\Kafedra\Discipline;
 use App\Models\Topics\ClassTopic;
-use App\Models\UserDepartment\Section;
+use App\Models\Kafedra\Section;
 use App\Traits\AuthorEditorTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Tags\HasTags;
 
 class Question extends Model
 {
-    use HasFactory;
     use HasTags;
     use SoftDeletes;
 
+    use \Znck\Eloquent\Traits\BelongsToThrough;
     use AuthorEditorTrait;
 
     protected $fillable = [
@@ -41,9 +42,14 @@ class Question extends Model
         return $this->belongsTo(Section::class);
     }
 
+
     public function class_topics()
     {
         return $this->belongsToMany(ClassTopic::class)->withTimestamps();
     }
 
+    public function department()
+    {
+        return $this->belongsToThrough(Department::class, Section::class);
+    }
 }

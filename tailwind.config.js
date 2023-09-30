@@ -1,37 +1,45 @@
+/** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
 module.exports = {
     content: [
-        './resources/**/*.blade.php',
-        './vendor/filament/**/*.blade.php',
-        './vendor/wireui/wireui/resources/**/*.blade.php',
-        './vendor/wireui/wireui/ts/**/*.ts',
-        './vendor/wireui/wireui/src/View/**/*.php',
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+
         './app/Filament/**/*.php',
-    ],
-    safelist: [
-        'bg-yellow-200', 'bg-red-200', 'bg-gray-200', 'bg-green-200', 'bg-purple-200','bg-indigo-200', 'bg-pink-200', 'bg-blue-200', 'bg-violet-200'
-    ],
-    darkMode: 'class',
-    presets: [
-        require('./vendor/wireui/wireui/tailwind.config.js')
+        './resources/views/filament/**/*.blade.php',
+
+        './vendor/filament/**/*.blade.php',
+        './vendor/awcodes/filament-quick-create/resources/**/*.blade.php',
+        './vendor/bezhansalleh/filament-exceptions/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {
-            colors: {
-                danger: colors.rose,
-                primary: colors.blue,
-                success: colors.green,
-                warning: colors.yellow,
+            fontSize: {
+                'tiny': '.7rem',
+                'xs': '.75rem',
+                'sm': '.875rem',
+                'base': '1.0rem',
+                'lg': '1.15rem',
+                'xl': '1.25rem',
+                '2xl': '1.7rem',
+                '3xl': '1.875rem',
+                '4xl': '2.25rem',
+                '5xl': '3rem',
+                '6xl': '4rem',
+                '7xl': '5rem',
+            },
+            maxWidth: {
+                'xsm': '22rem',
+                'tiny': '16rem',
             },
         },
     },
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
-        require('tailwind-scrollbar'),
-        require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
     ],
 }
+

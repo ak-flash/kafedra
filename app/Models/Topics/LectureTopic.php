@@ -3,7 +3,7 @@
 namespace App\Models\Topics;
 
 use App\Models\Common\Faculty;
-use App\Models\UserDepartment\Discipline;
+use App\Models\Kafedra\Discipline;
 use App\Traits\AuthorEditorTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
