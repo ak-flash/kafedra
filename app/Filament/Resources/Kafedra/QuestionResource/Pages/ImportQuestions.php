@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Kafedra\QuestionResource\Pages;
 use App\Filament\Resources\Kafedra\QuestionResource;
 use App\Models\Kafedra\Section;
 use App\Models\MCQ\Question;
-use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -14,7 +13,7 @@ use Filament\Resources\Pages\Page;
 
 class ImportQuestions extends Page implements HasForms
 {
-    use HasPageShield;
+    //use HasPageShield;
     use InteractsWithForms;
 
     public $importText;
