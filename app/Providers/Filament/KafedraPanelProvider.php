@@ -37,7 +37,7 @@ class KafedraPanelProvider extends PanelProvider
             ->id('kafedra')
             ->path('')
             ->login()
-            ->registration()
+            //->registration()
             ->requiresEmailVerification()
             ->passwordReset()
             ->profile(EditProfile::class)

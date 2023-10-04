@@ -24,3 +24,6 @@
     background: #c0a0b9;
 }
 
+.fi-sidebar-nav {
+    scrollbar-width: thin;
+}
