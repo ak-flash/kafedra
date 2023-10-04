@@ -36,7 +36,7 @@ class EducationService {
 
     public static function getFaculties()
     {
-        return Cache::rememberForever('facultiesList', function () {
+        return Cache::tags('facultiesList')->rememberForever('facultiesList', function () {
             return Faculty::all();
         });
     }
