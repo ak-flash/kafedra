@@ -8,7 +8,6 @@ namespace App\Models;
  use App\Models\Kafedra\Section;
  use App\Services\FileService;
  use App\Services\UserService;
- use Attribute;
  use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
  use Filament\Facades\Filament;
  use Filament\Models\Contracts\HasAvatar;
@@ -23,18 +22,16 @@ namespace App\Models;
  use Illuminate\Notifications\Notifiable;
  use Illuminate\Support\Facades\Storage;
  use Laravel\Sanctum\HasApiTokens;
- use OwenIt\Auditing\Contracts\Auditable;
  use Spatie\Permission\Traits\HasRoles;
 
 
- class User extends Authenticatable  implements  MustVerifyEmail, FilamentUser, HasAvatar, Auditable, HasTenants
+ class User extends Authenticatable  implements  MustVerifyEmail, FilamentUser, HasAvatar,  HasTenants
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
     use HasPanelShield;
     use SoftDeletes;
 
-    use \OwenIt\Auditing\Auditable;
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 
