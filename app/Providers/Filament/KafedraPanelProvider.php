@@ -54,7 +54,7 @@ class KafedraPanelProvider extends PanelProvider
                 'success' => Color::Green,
                 'warning' => Color::Orange,
             ])
-            ->viteTheme('resources/css/filament/kafedra/theme.css')
+            ->viteTheme('resources/css/filament/kafedra/kafedra.css')
             ->discoverResources(in: app_path('Filament/Resources/Kafedra'), for: 'App\\Filament\\Resources\\Kafedra')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
