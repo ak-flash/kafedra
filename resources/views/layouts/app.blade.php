@@ -9,10 +9,8 @@
 
         <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
         @filamentStyles
-        @filamentScripts
+        @vite('resources/css/app.css')
 
         @stack('head_scripts')
 
@@ -25,7 +23,10 @@
 
         @stack('scripts')
 
-        @livewire('notifications')
+        {{--@livewire('notifications')--}}
+
+        @filamentScripts
+        @vite('resources/js/app.js')
 
         <script>
             window.addEventListener('need-reload', event => {

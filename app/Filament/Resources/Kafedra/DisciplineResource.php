@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Kafedra;
 
 
 use App\Filament\Resources\Kafedra;
+use App\Filament\Widgets\EmptyDataNotification;
 use App\Models\Kafedra\Discipline;
 use App\Services\EducationService;
 use Filament\Facades\Filament;
@@ -54,6 +55,11 @@ class DisciplineResource extends Resource
                             ->required()
                             ->maxLength(30),
 
+                        Forms\Components\Select::make('section_id')
+                            ->label('Тематический блок')
+                            ->relationship(name: 'section', titleAttribute: 'name')
+                            ->required()
+                            ->columnSpanFull(),
 
                         Forms\Components\Select::make('faculty_id')
                             ->label('Специальность')
@@ -89,7 +95,8 @@ class DisciplineResource extends Resource
                 Tables\Columns\TextColumn::make('id')->label('Id')->toggleable()->sortable()->searchable()->toggledHiddenByDefault(),
 
                 Tables\Columns\TextColumn::make('name')->label('Название дисциплины')->sortable()->searchable()
-                    ->tooltip(fn (Model $record): ?string => $record->description),
+                    ->tooltip(fn (Model $record): ?string => $record->description)
+                    ->description(fn (Model $record): ?string => 'ТБ: '.$record->section->name),
 
                 Tables\Columns\TextColumn::make('semester')->label('Курс')->sortable()
                     ->formatStateUsing(fn (string $state): string => EducationService::getCourseNumber($state))
@@ -113,7 +120,8 @@ class DisciplineResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
-            ]);
+            ])->selectCurrentPageOnly()
+            ->emptyStateHeading('Не забудьте сначала добавить ТЕМАТИЧЕСКИЕ БЛОКИ!!!');
     }
 
     public static function getRelations(): array
@@ -122,6 +130,8 @@ class DisciplineResource extends Resource
             //
         ];
     }
+
+
 
     public static function getPages(): array
     {
@@ -135,7 +145,7 @@ class DisciplineResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->with(['faculty']);
+            ->with(['faculty', 'section']);
     }
 
     public static function getNavigationBadge(): ?string
