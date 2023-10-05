@@ -71,11 +71,10 @@
         </div>
     </div>
 
-    <x-filament::modal id="preview-questions" :close-by-clicking-away="false" :close-button="false"  width="screen">
+    <x-filament::modal id="preview-questions" :close-by-clicking-away="false" :close-button="false" width="7xl">
         <x-slot name="heading">
             Предпросмотр импортируемых вопросов
         </x-slot>
-
 
         <form wire:submit="submit">
             <div class="grid grid-cols-1 sm:grid-cols-2 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-white rounded-md gap-4 px-4 py-2 shadow-md">
